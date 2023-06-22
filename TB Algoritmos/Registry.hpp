@@ -129,7 +129,7 @@ public:
     }
 
     bool verifyLogin(string id, string password, string role) {
-        bool found = false;
+       bool found = false;
         
         if (role == "alumno") {
             auto a = studentDatabase.getByCriteria(
@@ -145,24 +145,30 @@ public:
         }
 
         else if (role == "profesor") {
-            professorDatabase.forEach([&](Professor* professor) {
-                if (professor->getId() == id && professor->getPassword() == password) {
-                    system("cls");
-                    cout << "Bienvenido " << professor->getName() << endl;
-                    professorMenu(professor, studentDatabase);
-                    found = true;
+            auto p = professorDatabase.getByCriteria(
+                [&](Professor* professor) {
+                    return professor->getId() == id && professor->getPassword() == password;
                 }
-                });
+            );
+            if (p != nullptr) {
+                found = true;
+                system("cls");
+                cout << "Bienvenido " << p->getName() << endl;
+                professorMenu(p, studentDatabase);
+            }
         }
         else if (role == "administrador") {
-            adminDatabase.forEach([&](Administrator* admin) {
-                if (admin->getId() == id && admin->getPassword() == password) {
-                    system("cls");
-                    cout << "Bienvenido " << admin->getName() << endl;
-                    adminMenu(admin, professorDatabase, studentDatabase);
-                    found = true;
-                }
-                });
+            auto a = adminDatabase.getByCriteria(
+                [&](Administrator* admin) {
+					return admin->getId() == id && admin->getPassword() == password;
+				}
+			);
+            if (a != nullptr) {
+                found = true;
+				system("cls");
+				cout << "Bienvenido " << a->getName() << endl;
+				adminMenu(a, professorDatabase, studentDatabase);
+			}
         }
         return found;
     }
