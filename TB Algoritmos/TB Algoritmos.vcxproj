@@ -135,6 +135,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrator.hpp" />
+    <ClInclude Include="Forum.hpp" />
+    <ClInclude Include="Message.hpp" />
     <ClInclude Include="Student.hpp" />
     <ClInclude Include="BST.hpp" />
     <ClInclude Include="Course.hpp" />
@@ -143,6 +145,7 @@
     <ClInclude Include="DLL.hpp" />
     <ClInclude Include="Professor.hpp" />
     <ClInclude Include="Registry.hpp" />
+    <ClInclude Include="Vector.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
