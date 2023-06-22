@@ -27,9 +27,6 @@
     <Text Include="cursos_matriculados.txt">
       <Filter>Archivos de recursos</Filter>
     </Text>
-    <Text Include="..\..\students.txt">
-      <Filter>Archivos de recursos</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Student.hpp">

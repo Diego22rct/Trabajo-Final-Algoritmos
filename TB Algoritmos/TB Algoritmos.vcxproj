@@ -127,7 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="..\..\students.txt" />
     <Text Include="administradores.txt" />
     <Text Include="Cursos.txt" />
     <Text Include="cursos_matriculados.txt" />

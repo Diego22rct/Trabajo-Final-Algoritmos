@@ -89,7 +89,7 @@ public:
     }
 
     void loadStudents() {
-        ifstream file("students.txt");
+        ifstream file("students.csv");
         string name, id, email, major, password;
         int cycle;
 
@@ -130,16 +130,20 @@ public:
 
     bool verifyLogin(string id, string password, string role) {
         bool found = false;
+        
         if (role == "alumno") {
-            studentDatabase.forEach([&](Student* student) {
-                if (student->getId() == id && student->getPassword() == password) {
-                    system("cls");
-                    cout << "Bienvenido " << student->getName() << endl;
-                    studentMenu(student);
-                    found = true;
-                }
-                });
+            auto a = studentDatabase.getByCriteria(
+                [&](Student* student) {
+					return student->getId() == id && student->getPassword() == password;
+				});
+            if (a != nullptr) {
+				found = true;
+                system("cls");
+                cout << "Bienvenido " << a->getName() << endl;
+                studentMenu(a);
+			}
         }
+
         else if (role == "profesor") {
             professorDatabase.forEach([&](Professor* professor) {
                 if (professor->getId() == id && professor->getPassword() == password) {
@@ -425,7 +429,7 @@ public:
                 cin >> id;
                 cout << "Ingrese su contrasena: ";
                 cin >> password;
-                cout << "Ingrese su rol: ";
+                cout << "Ingrese su rol (alumno, profesor, administrador ): ";
                 cin >> role;
                 if (!verifyLogin(id, password, role)) {
                     cout << "No se pudo iniciar sesion" << endl;
