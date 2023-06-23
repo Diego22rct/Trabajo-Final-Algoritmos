@@ -231,13 +231,20 @@ public:
                 string id;
                 cin >> id;
                 Student* keyStudent = new Student("", id, "", "", 0, "");
-                Student* foundStudent = studentTree.find(keyStudent);
+                /*Student* foundStudent = studentTree.find(keyStudent);
                 if (foundStudent) {
                     cout << "Alumno encontrado: " << foundStudent->getName() << " (" << foundStudent->getId() << ")\n";
                 }
                 else {
                     cout << "Alumno no encontrado.\n";
-                }
+                }*/
+                auto s = studentTree.find(keyStudent);
+                if (s != nullptr) {
+					cout << "Alumno encontrado: " << s->getName() << " (" << s->getId() << ")\n";
+				}
+                else {
+					cout << "Alumno no encontrado.\n";
+				}
                 break;
             }
             case 4: {
@@ -245,9 +252,9 @@ public:
                 string id;
                 cin >> id;
                 Professor* keyProfessor = new Professor("", id, "", "");
-                Professor* foundProfessor = professorTree.find(keyProfessor);
-                if (foundProfessor) {
-                    cout << "Profesor encontrado: " << foundProfessor->getName() << " (" << foundProfessor->getId() << ")\n";
+                auto p = professorTree.find(keyProfessor);
+                if (p != nullptr) {
+                    cout << "Profesor encontrado: " << p->getName() << " (" << p->getId() << ")\n";
                 }
                 else {
                     cout << "Profesor no encontrado.\n";
@@ -259,9 +266,9 @@ public:
                 string id;
                 cin >> id;
                 Administrator* keyAdmin = new Administrator("", id, "", "");
-                Administrator* foundAdmin = administratorTree.find(keyAdmin);
-                if (foundAdmin) {
-                    cout << "Administrador encontrado: " << foundAdmin->getName() << " (" << foundAdmin->getId() << ")\n";
+                auto a = administratorTree.find(keyAdmin);
+                if (a != nullptr) {
+                    cout << "Administrador encontrado: " << a->getName() << " (" << a->getId() << ")\n";
                 }
                 else {
                     cout << "Administrador no encontrado.\n";
