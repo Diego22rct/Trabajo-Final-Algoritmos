@@ -1,9 +1,10 @@
 #include "Registry.hpp"
 int main() {
 	Registry* Programa = new Registry();
-	while (true)
+	bool run = true;
+	while (run)
 	{
-		Programa->iniciarPrograma();
+		run = Programa->iniciarPrograma();
 	}
 	delete Programa;
 	return 0;

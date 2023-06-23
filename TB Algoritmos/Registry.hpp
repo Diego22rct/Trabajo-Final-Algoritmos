@@ -38,39 +38,37 @@ public:
     }
 
     void saveStudents() {
-        ofstream file("students.csv");
+        //sobre escribir todo el archivo
+        ofstream file("students.csv", ios::ate);
         if (file.is_open()) {
             studentDatabase.forEach([&](Student* student) {
-                file << student->getName() << " " << student->getId() << " " << student->getEmail() << " "
-                    << student->getCycle() << " " << student->getPassword() << endl;
-                });
-            file.close();
-        }
-        else {
-            cout << "No se pudo abrir";
-        }
+				file << student->getName() << " " << student->getId() << " " << student->getEmail() << " "
+					<< student->getMajor() << " " << student->getCycle() << " " << student->getPassword() << endl;
+				});
+			file.close();
+		}
     }
 
     void saveProfessors() {
-        ofstream file("professors.txt");
+        ofstream file("professors.txt", ios::ate);
         if (file.is_open()) {
             professorDatabase.forEach([&](Professor* professor) {
-                file << professor->getName() << " " << professor->getId() << " " << professor->getEmail() << " "
-                    << professor->getPassword() << endl;
-                });
-            file.close();
-        }
+				file << professor->getName() << " " << professor->getId() << " " << professor->getEmail() << " "
+					<< " " << professor->getPassword() << endl;
+				});
+			file.close();
+		}
     }
 
     void saveAdmins() {
-        ofstream file("admins.txt");
+        ofstream file("admins.txt", ios::ate);
         if (file.is_open()) {
             adminDatabase.forEach([&](Administrator* admin) {
-                file << admin->getName() << " " << admin->getId() << " " << admin->getEmail() << " "
-                    << " " << admin->getPassword() << endl;
-                });
-            file.close();
-        }
+				file << admin->getName() << " " << admin->getId() << " " << admin->getEmail() << " "
+					<< admin->getRole() << " " << admin->getPassword() << endl;
+				});
+			file.close();
+		}
     }
 
     void showStudents() {
@@ -369,7 +367,7 @@ public:
 
     // Inicio Programa
 
-    void iniciarPrograma() {
+    bool iniciarPrograma() {
         srand(time(0));
         int option;
         do {
@@ -441,11 +439,13 @@ public:
             }
             case 3:
                 cout << "Saliendo del programa...\n";
-                exit(0);
+               //saveStudents();
+                return false;
                 break;
             default:
                 cout << "Opcion invalida. Intente de nuevo.\n";
             }
+            return true;
         } while (option != 3);
     }
 };
