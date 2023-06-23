@@ -10,7 +10,7 @@ private:
     string role;
 
 public:
-    Administrator(string id = " ", string name = " ", string email = " ", string role = " ", string password = " ")
+    Administrator(string id = " ", string name = " ", string email = " ", string password = " ")
         : User(id, name, email, password, "administrador"), role(role) {}
 
     string getRole() {

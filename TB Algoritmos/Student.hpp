@@ -32,7 +32,7 @@ public:
     }
 
     void loadCourses() {
-        ifstream file("cursos.txt");
+        ifstream file("Cursos.txt");
         string idx, name, code, major;
         int term;
         while (getline(file, idx, ','), getline(file, name, ','), getline(file, code, ','), getline(file, major, ','), file >> term) {
@@ -61,7 +61,7 @@ public:
     }
 
     void loadGrades() {
-        ifstream file("cursos.txt");
+        ifstream file("Cursos.txt");
         string studentName, courseCode;
         double finalGrade;
         while (getline(file, studentName, ','), getline(file, courseCode, ','), file >> finalGrade) {

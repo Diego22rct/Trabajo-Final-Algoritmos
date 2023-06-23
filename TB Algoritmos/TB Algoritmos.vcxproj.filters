@@ -21,13 +21,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="registro.txt">
-      <Filter>Archivos de recursos</Filter>
-    </Text>
     <Text Include="Cursos.txt">
-      <Filter>Archivos de recursos</Filter>
-    </Text>
-    <Text Include="administradores.txt">
       <Filter>Archivos de recursos</Filter>
     </Text>
     <Text Include="cursos_matriculados.txt">
@@ -88,6 +82,9 @@
       <Filter>Archivos de recursos</Filter>
     </None>
     <None Include="professors.csv">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="admins.csv">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>
