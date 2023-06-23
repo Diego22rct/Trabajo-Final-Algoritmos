@@ -32,7 +32,7 @@ public:
     }
 
     void loadCourses() {
-        ifstream file("courses.csv");
+        ifstream file("cursos.txt");
         string idx, name, code, major;
         int term;
         while (getline(file, idx, ','), getline(file, name, ','), getline(file, code, ','), getline(file, major, ','), file >> term) {
@@ -43,13 +43,13 @@ public:
 
     void saveCourse(Course* course) {
         ofstream file;
-        file.open("enrolled_courses.csv", ios::app);
+        file.open("cursos_matriculados.txt", ios::app);
         file << getName() << "," << course->getCourseCode() << "," << course->getCourseName() << "\n";
         file.close();
     }
 
     void loadEnrolledCourses() {
-        ifstream file("enrolled_courses.csv");
+        ifstream file("cursos_matriculados.txt");
         string name, courseCode, courseName;
         while (getline(file, name, ','), getline(file, courseCode, ','), getline(file, courseName)) {
             if (name == getName()) {
@@ -61,7 +61,7 @@ public:
     }
 
     void loadGrades() {
-        ifstream file("grades.csv");
+        ifstream file("cursos.txt");
         string studentName, courseCode;
         double finalGrade;
         while (getline(file, studentName, ','), getline(file, courseCode, ','), file >> finalGrade) {

@@ -385,8 +385,7 @@ public:
             cout << "2. Iniciar sesion\n";
             cout << "3. Salir\n";
             cout << "Ingresa una opcion: ";
-            //cin >> option;
-            option = 2;
+            cin >> option;
             switch (option) {
             case 1: {
                 string name, id, email, password, role;
@@ -435,15 +434,12 @@ public:
             }
             case 2: {
                 string id, password, role;
-                /*cout << "Ingrese su codigo: ";
+                cout << "Ingrese su codigo: ";
                 cin >> id;
                 cout << "Ingrese su contrasena: ";
                 cin >> password;
                 cout << "Ingrese su rol (alumno, profesor, administrador ): ";
-                cin >> role;*/
-                id = "U20221A715";
-                password = "123456";
-                role = "alumno";
+                cin >> role;
                 if (!verifyLogin(id, password, role)) {
                     cout << "No se pudo iniciar sesion" << endl;
                 }

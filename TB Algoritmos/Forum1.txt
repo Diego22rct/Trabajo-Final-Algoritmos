@@ -1,5 +1,0 @@
-1;U20221A715;Hola, como estan?
-2;U20221A715;Yo bien xd
-3;U20221A715;jajasjajs ya funciona
-;U20221A715;jajasjajs ya funciona
-5;U20221A715;a
