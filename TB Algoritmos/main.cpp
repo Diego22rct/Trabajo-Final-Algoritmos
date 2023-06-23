@@ -5,4 +5,6 @@ int main() {
 	{
 		Programa->iniciarPrograma();
 	}
+	delete Programa;
+	return 0;
 }
