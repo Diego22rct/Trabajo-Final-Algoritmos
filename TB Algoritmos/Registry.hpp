@@ -15,7 +15,7 @@ private:
 public:
     Registry() {
         loadStudents();
-        showStudents();
+        //showStudents();
         loadProfessors();
         loadAdmins();
         forum = Forum("Forum1");
@@ -324,7 +324,8 @@ public:
             cout << "3. Matricularse en un curso\n";
             cout << "4. Ver notas de los cursos\n";
             cout << "5. Retirarse de un curso\n";
-            cout << "6. Salir\n";
+            cout << "6. Ingresar al foro\n";
+            cout << "7. Salir\n";
             cout << "Ingrese una opcion: ";
             cin >> option;
 
@@ -356,13 +357,21 @@ public:
                 student->withdrawCourse();
                 break;
             }
-            case 6:
+            case 6: {
+                cout << "Foro: " << forum.getforumName() << endl;
+                forum.showMesages();
+                string message;
+                cout << "Ingrese el mensaje: ";
+                getline(cin >> ws, message);
+                forum.addMessage(student, message);
+            }break;
+            case 7:
                 cout << "Saliendo del programa...\n";
                 break;
             default:
                 cout << "Opcion invalida. Intente de nuevo.\n";
             }
-        } while (option != 6);
+        } while (option != 7);
     }
 
     // Inicio Programa
@@ -376,8 +385,8 @@ public:
             cout << "2. Iniciar sesion\n";
             cout << "3. Salir\n";
             cout << "Ingresa una opcion: ";
-            cin >> option;
-
+            //cin >> option;
+            option = 2;
             switch (option) {
             case 1: {
                 string name, id, email, password, role;
@@ -426,12 +435,15 @@ public:
             }
             case 2: {
                 string id, password, role;
-                cout << "Ingrese su codigo: ";
+                /*cout << "Ingrese su codigo: ";
                 cin >> id;
                 cout << "Ingrese su contrasena: ";
                 cin >> password;
                 cout << "Ingrese su rol (alumno, profesor, administrador ): ";
-                cin >> role;
+                cin >> role;*/
+                id = "U20221A715";
+                password = "123456";
+                role = "alumno";
                 if (!verifyLogin(id, password, role)) {
                     cout << "No se pudo iniciar sesion" << endl;
                 }

@@ -5,6 +5,7 @@
 #include <fstream>
 #include "Vector.hpp"
 #include "Message.hpp"
+#include "Student.hpp"
 
 using namespace std;
 
@@ -16,10 +17,8 @@ private:
 public:
 	Forum(string forumName = "") : forumName(forumName)
 	{
-		messages = Vector<Message>();
 		cout << "Leyendo foro...";
 		readForum();
-		cout << "Foro leido" << endl;
 	}
 	~Forum() {}
 
@@ -35,43 +34,51 @@ public:
 			string codeUser;
 			string text;
 			while (!file.eof()) {
-				getline(file, id, ',');
-				getline(file, codeUser, ',');
+				getline(file, id, ';');
+				getline(file, codeUser, ';');
 				getline(file, text, '\n');
 				Message message(id, codeUser, text);
 				messages.push_back(message);
 			}
+			cout << "Foro leido" << endl;
 		}
 		file.close();
 	}
 	//guardar foro
 	void saveForum() {
-		//save all in the file
+		//sobre escribir todo el archivo
 		ofstream file;
-		file.open("Forum1.txt", ios::out, ios::ate);
-		for (int i = 0; i < messages.size(); i++) {
-			file << messages[i].getId() << "," << messages[i].getCodeUser() << "," << messages[i].getText() << endl;
+		file.open("Forum1.txt", ios::ate);
+		if (file.fail()) {
+			cout << "No se pudo abrir el archivo" << endl;
+		}
+		else {
+			for (int i = 0; i < messages.size(); i++) {
+				file << messages[i].getId() << ";" << messages[i].getCodeUser() << ";" << messages[i].getText() << endl;
+			}
+			cout << "Mensaje guardado" << endl;
 		}
 	}
 	//agregar mensaje
-	void addMessage(Message msg) {
-		messages.push_back(msg);
-		cout << msg.getCodeUser() << msg.getText() << endl;
+	void addMessage(Student* u, string msg) {
+		Message message(to_string(messages.size() + 1), u->getId(), msg);
+		messages.push_back(message);
+		saveForum();
 	}
 
 	void showMesages() {
-		cout << "Foro: " << forumName << endl;
-
-		for (int i = 0; i < messages.size(); i++) {
-			cout << "ID: " + messages[i].getId() << "- User: " << messages[i].getCodeUser() << ": " << messages[i].getText() << endl;
+		if (messages.size() == 1) {
+			cout << "No hay mensajes en el foro, Se el primero\n";
+		}
+		else
+		{
+			for (int i = 0; i < messages.size()-1; i++) {
+				cout << i << "ID: " + messages[i].getId() << " User: " << messages[i].getCodeUser() << ": " << messages[i].getText() << "\n";
+			}
 		}
 	}
-	void forumApp(string codeUser) {
-		showMesages();
-		cout << "Escriba su mensaje: ";
-		string text;
-		cin >> text;
-		Message msg(to_string(messages.size() + 1), codeUser, text);
+	string getforumName() {
+		return forumName;
 	}
 };
 
