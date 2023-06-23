@@ -60,8 +60,11 @@ public:
         )
     {
         loadStudents();
+      
         loadProfessors();
+        
         loadAdmins();
+    
         forum = Forum("Forum1");
     }
 
@@ -127,6 +130,10 @@ public:
             }
             file.close();
         }
+        else
+        {
+            cout << "read file error" << endl;
+        }
     }
 
     void loadProfessors() {
@@ -140,6 +147,10 @@ public:
             }
             file.close();
         }
+        else
+        {
+            cout << "read file error" << endl;
+        }
     }
 
     void loadAdmins() {
@@ -152,6 +163,10 @@ public:
                 adminDatabase.pushBack(admin);
             }
             file.close();
+        }
+        else
+        {
+            cout << "read file error" << endl;
         }
     }
 
@@ -352,7 +367,8 @@ public:
             cout << "1. Ver cursos dictados\n";
             cout << "2. Modificar las notas de un alumno\n";
             cout << "3. Eliminar nota de un alumno\n";
-            cout << "4. Salir\n";
+            cout << "4. Ingresar al foro\n";
+            cout << "5. Salir\n";
             cout << "Ingrese una opcion: ";
             cin >> option;
 
@@ -384,13 +400,20 @@ public:
                 professor->removeStudentGrade(students, codeCourse);
                 break;
             }
-            case 4:
+            case 4: {
+                forum.showMesages();
+                cout << "Ingresar el mensaje\n";
+                string message;
+                getline(cin >> ws, message);
+                forum.addMessageProfessor(professor, message);
+            } break;
+            case 5:
                 cout << "Saliendo del programa...\n";
                 break;
             default:
                 cout << "Opcion invalida. Intente de nuevo.\n";
             }
-        } while (option != 4);
+        } while (option != 5);
     }
 
     void studentMenu(Student* student) {
@@ -458,6 +481,7 @@ public:
         srand(time(0));
         int option;
         do {
+            system("cls");
             cout << "Menu de registro\n";
             cout << "1. Registrarse\n";
             cout << "2. Iniciar sesion\n";
