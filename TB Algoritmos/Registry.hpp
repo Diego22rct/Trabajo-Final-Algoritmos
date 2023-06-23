@@ -14,6 +14,7 @@ private:
 public:
     Registry() {
         loadStudents();
+        showStudents();
         loadProfessors();
         loadAdmins();
     }
