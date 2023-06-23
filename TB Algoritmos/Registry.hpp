@@ -4,19 +4,21 @@
 #include "DLL.hpp"
 #include "Professor.hpp"
 #include "Administrator.hpp"
+#include "Forum.hpp"
 
 class Registry {
 private:
     DLL<Student*> studentDatabase;
     DLL<Professor*> professorDatabase;
     DLL<Administrator*> adminDatabase;
-
+    Forum forum;
 public:
     Registry() {
         loadStudents();
         showStudents();
         loadProfessors();
         loadAdmins();
+        forum = Forum("Forum1");
     }
 
     ~Registry() {

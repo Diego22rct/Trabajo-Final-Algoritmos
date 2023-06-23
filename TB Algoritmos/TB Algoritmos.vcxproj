@@ -130,6 +130,7 @@
     <Text Include="administradores.txt" />
     <Text Include="Cursos.txt" />
     <Text Include="cursos_matriculados.txt" />
+    <Text Include="Forum1.txt" />
     <Text Include="registro.txt" />
   </ItemGroup>
   <ItemGroup>

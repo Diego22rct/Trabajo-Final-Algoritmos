@@ -20,7 +20,6 @@ public:
 		cout << "Leyendo foro...";
 		readForum();
 		cout << "Foro leido" << endl;
-		system("cls");
 	}
 	~Forum() {}
 
