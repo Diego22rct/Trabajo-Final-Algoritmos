@@ -35,9 +35,6 @@
     <ClInclude Include="Registry.hpp">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Forum.hpp">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Administrator.hpp">
       <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
@@ -69,7 +66,10 @@
       <Filter>Archivos de encabezado\Genericas</Filter>
     </ClInclude>
     <ClInclude Include="Library.hpp">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Entidades</Filter>
+    </ClInclude>
+    <ClInclude Include="Forum.hpp">
+      <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@
 #include "Vector.hpp"
 #include "Message.hpp"
 #include "Student.hpp"
+#include "Professor.hpp"
 
 using namespace std;
 
@@ -17,7 +18,6 @@ private:
 public:
 	Forum(string forumName = "") : forumName(forumName)
 	{
-		cout << "Leyendo foro...";
 		readForum();
 	}
 	~Forum() {}
@@ -62,6 +62,11 @@ public:
 	//agregar mensaje
 	void addMessage(Student* u, string msg) {
 		Message message(to_string(messages.size() + 1), u->getId(), msg);
+		messages.push_back(message);
+		saveForum();
+	}
+	void addMessageProfessor(Professor* p, string msg) {
+		Message message(to_string(messages.size() + 1), p->getId(), "Professor add: " + msg);
 		messages.push_back(message);
 		saveForum();
 	}

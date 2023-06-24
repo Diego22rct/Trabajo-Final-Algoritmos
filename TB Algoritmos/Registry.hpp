@@ -60,8 +60,11 @@ public:
         )
     {
         loadStudents();
+      
         loadProfessors();
+        
         loadAdmins();
+    
         forum = Forum("Forum1");
     }
 
@@ -127,6 +130,10 @@ public:
             }
             file.close();
         }
+        else
+        {
+            cout << "read file error" << endl;
+        }
     }
 
     void loadProfessors() {
@@ -140,6 +147,10 @@ public:
             }
             file.close();
         }
+        else
+        {
+            cout << "read file error" << endl;
+        }
     }
 
     void loadAdmins() {
@@ -152,6 +163,10 @@ public:
                 adminDatabase.pushBack(admin);
             }
             file.close();
+        }
+        else
+        {
+            cout << "read file error" << endl;
         }
     }
 
@@ -231,13 +246,20 @@ public:
                 string id;
                 cin >> id;
                 Student* keyStudent = new Student("", id, "", "", 0, "");
-                Student* foundStudent = studentTree.find(keyStudent);
+                /*Student* foundStudent = studentTree.find(keyStudent);
                 if (foundStudent) {
                     cout << "Alumno encontrado: " << foundStudent->getName() << " (" << foundStudent->getId() << ")\n";
                 }
                 else {
                     cout << "Alumno no encontrado.\n";
-                }
+                }*/
+                auto s = studentTree.find(keyStudent);
+                if (s != nullptr) {
+					cout << "Alumno encontrado: " << s->getName() << " (" << s->getId() << ")\n";
+				}
+                else {
+					cout << "Alumno no encontrado.\n";
+				}
                 break;
             }
             case 4: {
@@ -245,9 +267,9 @@ public:
                 string id;
                 cin >> id;
                 Professor* keyProfessor = new Professor("", id, "", "");
-                Professor* foundProfessor = professorTree.find(keyProfessor);
-                if (foundProfessor) {
-                    cout << "Profesor encontrado: " << foundProfessor->getName() << " (" << foundProfessor->getId() << ")\n";
+                auto p = professorTree.find(keyProfessor);
+                if (p != nullptr) {
+                    cout << "Profesor encontrado: " << p->getName() << " (" << p->getId() << ")\n";
                 }
                 else {
                     cout << "Profesor no encontrado.\n";
@@ -259,9 +281,9 @@ public:
                 string id;
                 cin >> id;
                 Administrator* keyAdmin = new Administrator("", id, "", "");
-                Administrator* foundAdmin = administratorTree.find(keyAdmin);
-                if (foundAdmin) {
-                    cout << "Administrador encontrado: " << foundAdmin->getName() << " (" << foundAdmin->getId() << ")\n";
+                auto a = administratorTree.find(keyAdmin);
+                if (a != nullptr) {
+                    cout << "Administrador encontrado: " << a->getName() << " (" << a->getId() << ")\n";
                 }
                 else {
                     cout << "Administrador no encontrado.\n";
@@ -347,7 +369,8 @@ public:
             cout << "1. Ver cursos dictados\n";
             cout << "2. Modificar las notas de un alumno\n";
             cout << "3. Eliminar nota de un alumno\n";
-            cout << "4. Salir\n";
+            cout << "4. Ingresar al foro\n";
+            cout << "5. Salir\n";
             cout << "Ingrese una opcion: ";
             cin >> option;
 
@@ -379,13 +402,20 @@ public:
                 professor->removeStudentGrade(students, codeCourse);
                 break;
             }
-            case 4:
+            case 4: {
+                forum.showMesages();
+                cout << "Ingresar el mensaje\n";
+                string message;
+                getline(cin >> ws, message);
+                forum.addMessageProfessor(professor, message);
+            } break;
+            case 5:
                 cout << "Saliendo del programa...\n";
                 break;
             default:
                 cout << "Opcion invalida. Intente de nuevo.\n";
             }
-        } while (option != 4);
+        } while (option != 5);
     }
 
     void studentMenu(Student* student) {
@@ -453,6 +483,7 @@ public:
         srand(time(0));
         int option;
         do {
+            system("cls");
             cout << "Menu de registro\n";
             cout << "1. Registrarse\n";
             cout << "2. Iniciar sesion\n";

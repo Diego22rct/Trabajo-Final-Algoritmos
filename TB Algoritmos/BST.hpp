@@ -123,18 +123,10 @@ private:
     }
 
     T _find(Node* node, T value) {
-        if (node == nullptr) {
-            throw "Value does not exists in this tree";
-        }
-        else if (_equals(node->value, value)) {
-            return node->value;
-        }
-        else if (_compare(value, node->value)) {
-            return _find(node->leftChild, value);
-        }
-        else {
-            return _find(node->rightChild, value);
-        }
+        if (node == nullptr) throw "Value does not exists in this tree";
+		if (_equals(node->value, value)) return node->value;
+		if (_compare(node->value, value)) return _find(node->leftChild, value);
+		return _find(node->rightChild, value);
     }
 
     void _preOrder(Node* n) {
