@@ -278,6 +278,8 @@ public:
                 cin >> id;
                 cout << "Ingrese el correo: ";
                 cin >> email;
+                cout << "Ingrese su carrera: ";
+                cin >> major;
                 cout << "Ingrese el ciclo: ";
                 cin >> cycle;
                 cout << "Ingrese la contraseña: ";
