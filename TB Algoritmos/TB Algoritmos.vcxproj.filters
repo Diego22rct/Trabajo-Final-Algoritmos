@@ -68,8 +68,14 @@
     <ClInclude Include="Library.hpp">
       <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
+    <ClInclude Include="Graph.hpp">
+      <Filter>Archivos de encabezado\Genericas</Filter>
+    </ClInclude>
     <ClInclude Include="Forum.hpp">
-      <Filter>Archivos de encabezado\Entidades</Filter>
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.hpp">
+      <Filter>Archivos de encabezado\Genericas</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

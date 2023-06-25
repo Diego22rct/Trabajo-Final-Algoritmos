@@ -7,6 +7,7 @@
 #include "Message.hpp"
 #include "Student.hpp"
 #include "Professor.hpp"
+#include "Graph.hpp"
 
 using namespace std;
 
@@ -14,10 +15,12 @@ class Forum
 {
 private:
 	string forumName;
-	Vector<Message> messages;
+	Graph<Message>* messages;
+	int size;
 public:
-	Forum(string forumName = "") : forumName(forumName)
+	Forum(string forumName = "", int size=0) : forumName(forumName), size(size)
 	{
+		messages = new Graph<Message>(100);
 		readForum();
 	}
 	~Forum() {}
@@ -38,7 +41,12 @@ public:
 				getline(file, codeUser, ';');
 				getline(file, text, '\n');
 				Message message(id, codeUser, text);
-				messages.push_back(message);
+
+				//Add to graph
+				messages->addNode(message);
+
+
+				this->size++;
 			}
 			cout << "Foro leido" << endl;
 		}
@@ -53,32 +61,36 @@ public:
 			cout << "No se pudo abrir el archivo" << endl;
 		}
 		else {
-			for (int i = 0; i < messages.size(); i++) {
-				file << messages[i].getId() << ";" << messages[i].getCodeUser() << ";" << messages[i].getText() << endl;
+			while (messages->isEmpty()) {
+				file << messages->getVertex(0).getId() << ";" << messages->getVertex(0).getCodeUser() << ";" << messages->getVertex(0).getText() << endl;
 			}
-			cout << "Mensaje guardado" << endl;
+			cout << "Foro guardado" << endl;
 		}
 	}
 	//agregar mensaje
 	void addMessage(Student* u, string msg) {
-		Message message(to_string(messages.size() + 1), u->getId(), msg);
-		messages.push_back(message);
+		Message message( to_string(this->size + 1), u->getId(), "Student add: " + msg);
+		messages->addNode(message);
+		messages->addEdge(messages->getVertex(this->size), messages->getVertex(this->size + 1));
+		this->size++;
 		saveForum();
 	}
 	void addMessageProfessor(Professor* p, string msg) {
-		Message message(to_string(messages.size() + 1), p->getId(), "Professor add: " + msg);
-		messages.push_back(message);
+		Message message(to_string(this->size + 1), p->getId(), "Professor add: " + msg);
+		messages->addNode(message);
+		messages->addEdge(messages->getVertex(this->size), messages->getVertex(this->size + 1));
+		this->size++;
 		saveForum();
 	}
 
 	void showMesages() {
-		if (messages.size() == 1) {
+		if ( this->size == 0) {
 			cout << "No hay mensajes en el foro, Se el primero\n";
 		}
 		else
 		{
-			for (int i = 0; i < messages.size()-1; i++) {
-				cout << i << "ID: " + messages[i].getId() << " User: " << messages[i].getCodeUser() << ": " << messages[i].getText() << "\n";
+			for (int i = 0; i < this->size+1; i++) {
+				cout << messages->getVertex(i).getId() << " " << messages->getVertex(i).getCodeUser() << " " << messages->getVertex(i).getText() << endl;
 			}
 		}
 	}

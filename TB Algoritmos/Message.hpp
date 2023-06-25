@@ -22,6 +22,16 @@ public:
 	{
 	}
 
+	friend ostream& operator<<(ostream& os, const Message& message)
+	{
+		os << message.id << " " << message.codeUser << " " << message.text << endl;
+		return os;
+	}
+
+	bool operator==(Message other)
+	{
+		return id == other.id;
+	}
 	//setters and getters
 	void setId(string id) { this->id = id; }
 	void setCodeUser(string codeUser) { this->codeUser = codeUser; }

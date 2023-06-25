@@ -9,6 +9,14 @@ private:
     int capacity;
     int length;
 
+
+
+public:
+    Vector() {
+        capacity = 10;
+        length = 0;
+        data = new T[capacity];
+    }
     void resize() {
         capacity *= 2;
         T* temp = new T[capacity];
@@ -17,13 +25,6 @@ private:
         }
         delete[] data;
         data = temp;
-    }
-
-public:
-    Vector() {
-        capacity = 10;
-        length = 0;
-        data = new T[capacity];
     }
 
     Vector(const Vector<T>& other) {
@@ -35,7 +36,7 @@ public:
         }
     }
 
-    Vector<T>& operator=(const Vector<T>& other) {
+    Vector<T> operator=(Vector<T>& other) {
         if (this != &other) {
             delete[] data;
             capacity = other.capacity;
@@ -100,10 +101,6 @@ public:
     }
 
     T& operator[](const int& index) {
-        return data[index];
-    }
-
-    const T& operator[](const int& index) const {
         return data[index];
     }
 

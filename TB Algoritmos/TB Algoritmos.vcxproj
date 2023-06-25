@@ -134,8 +134,10 @@
   <ItemGroup>
     <ClInclude Include="Administrator.hpp" />
     <ClInclude Include="Forum.hpp" />
+    <ClInclude Include="Graph.hpp" />
     <ClInclude Include="Library.hpp" />
     <ClInclude Include="Message.hpp" />
+    <ClInclude Include="Queue.hpp" />
     <ClInclude Include="Student.hpp" />
     <ClInclude Include="BST.hpp" />
     <ClInclude Include="Course.hpp" />
