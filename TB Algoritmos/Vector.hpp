@@ -53,7 +53,7 @@ public:
         delete[] data;
     }
 
-    void push_back(const T& value) {
+    void push_back(T value) {
         if (length == capacity) {
             resize();
         }

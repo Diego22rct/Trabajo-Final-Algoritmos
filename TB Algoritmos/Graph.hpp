@@ -33,7 +33,6 @@ private:
 
 public:
     Graph(int capacity = 10) : size(0), capacity(capacity) {
-        adj = Vector<Vector<int>>(capacity);
     }
 
     ~Graph() {
