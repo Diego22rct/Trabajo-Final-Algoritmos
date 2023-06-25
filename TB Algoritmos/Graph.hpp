@@ -15,8 +15,8 @@ private:
             return data;
         }
         bool operator==(Node other) {
-			return data == other.data;
-		}
+            return data == other.data;
+        }
     };
     Vector<Node*> nodes;
     Vector<Vector<int>> adj;
@@ -33,6 +33,7 @@ private:
 
 public:
     Graph(int capacity = 10) : size(0), capacity(capacity) {
+        adj = Vector<Vector<int>>(capacity);
     }
 
     ~Graph() {
@@ -46,6 +47,7 @@ public:
             return;
         }
         nodes.push_back(new Node(data));
+        adj.push_back(Vector<int>());
         size++;
     }
 
@@ -55,7 +57,6 @@ public:
         if (f == -1 || t == -1) {
             return;
         }
-        adj[f].resize();
         adj[f].push_back(t);
     }
 

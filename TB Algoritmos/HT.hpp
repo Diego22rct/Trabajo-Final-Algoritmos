@@ -65,8 +65,13 @@ public:
         return search(key);
     }
 
-    T getCopy(string& key) {
-        return search(key);
+    T getCopy(string key) {
+        int index = _hashFunction(key);
+        auto list = _hashTable[index];
+        T value = _hashTable[index]->getByCriteria([&](Element e) -> bool {
+            return e.key == key;
+            });
+        return value;
     }
 
     void display(void (*show)(T)) {
