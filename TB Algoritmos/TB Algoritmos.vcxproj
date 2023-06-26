@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="cursos_matriculados.txt" />
+    <Text Include="coursesEnrolled.txt" />
     <Text Include="Forum1.txt" />
   </ItemGroup>
   <ItemGroup>

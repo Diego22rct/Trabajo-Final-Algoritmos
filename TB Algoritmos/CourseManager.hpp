@@ -54,6 +54,20 @@ public:
 			file.close();
 		}
     }
+
+    void loadCoursesEnrolled() {
+        ifstream file("coursesEnrolled.txt");
+        string codeStudent,idx, name, code;
+
+        if (file.is_open()) {
+            while (getline(file, idx, ';'), getline(file, name, ';'), getline(file, code)) {
+                Course course(name, code);
+                addCourse(code, course);
+                cout << "Cargando curso: " << course.toString() << endl;
+            }
+            file.close();
+        }
+    }
 };
 
 #endif
