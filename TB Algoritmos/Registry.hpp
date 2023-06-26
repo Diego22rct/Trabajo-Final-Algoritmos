@@ -20,7 +20,6 @@ private:
     BST<Administrator*> administratorTree;
     Forum forum;
     Library library;
-    CourseManager courseManager;
 public:
     Registry() :
         studentTree(
@@ -71,7 +70,6 @@ public:
     
         forum = Forum("Forum1");
         library = Library(150);
-        courseManager = CourseManager();
     }
 
     ~Registry() {
@@ -375,12 +373,11 @@ public:
             switch (option) {
             case 1: {
                 cout << "Cursos dictados:\n";
-                //professor->verListaDeAlumnos(students);
                 professor->viewCoursesStudents(studentDatabase);
                 break;
             }
             case 2: {
-                //professor->viewCoursesStudents(students);
+                professor->viewCoursesStudents(students);
                 string codeCourse, codeStudent;
                 double newGrade;
                 cout << "Ingrese el c�digo del alumno: ";
@@ -389,15 +386,15 @@ public:
                 cin >> codeCourse;
                 cout << "Ingrese la nueva nota: ";
                 cin >> newGrade;
-                //professor->modifyStudentGrade(students, codeStudent, codeCourse, newGrade);
+                professor->modifyStudentGrade(students, codeStudent, codeCourse, newGrade);
                 break;
             }
             case 3: {
-                //professor->viewCoursesStudents(students);
+                professor->viewCoursesStudents(students);
                 string codeCourse;
                 cout << "Ingrese el c�digo del curso: ";
                 cin >> codeCourse;
-                //professor->removeStudentGrade(students, codeCourse);
+                professor->removeStudentGrade(students, codeCourse);
                 break;
             }
             case 4: {
@@ -433,10 +430,12 @@ public:
 
             switch (option) {
             case 1:
-                courseManager.displayCourses();
+                cout << "Cursos disponibles:\n";
+                student->showCourses();
                 break;
             case 2:
-                
+                cout << "Cursos matriculados:\n";
+                student->showEnrolledCourses();
                 break;
             case 3: {
                 cout << "Cursos disponibles:\n";
@@ -450,15 +449,15 @@ public:
                 break;
             }
             case 4:
-                //student->checkGrades();
+                student->checkGrades();
                 break;
             case 5: {
                 cout << "Cursos matriculados:\n";
-                //student->showEnrolledCourses();
+                student->showEnrolledCourses();
                 string codeCourse;
                 cout << "Ingrese el codigo del curso que desea retirar: ";
                 cin >> codeCourse;
-                //student->withdrawCourse();
+                student->withdrawCourse();
                 break;
             }
             case 6: {
