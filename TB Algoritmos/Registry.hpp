@@ -448,7 +448,7 @@ public:
             case 3: {
                 cout << "Cursos disponibles:\n";
                 studentDatabase.forEach([](Student* student) {
-					student->showEnrolledCourses();
+					student->   ();
 				});
                 string codigoCurso;
                 cout << "Ingrese el codigo del curso: ";
