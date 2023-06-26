@@ -45,7 +45,7 @@ public:
 				//Add to graph
 				messages->addNode(message);
 
-				this->size++;
+				++this->size;
 			}
 			cout << "Foro leido" << endl;
 		}
@@ -60,7 +60,7 @@ public:
 			cout << "No se pudo abrir el archivo" << endl;
 		}
 		else {
-			for (int i = 0; i < this->size; i++) {
+			for (int i = 1; i < this->size; i++) {
 				file << messages->getVertex(i).getId() << ";" << messages->getVertex(i).getCodeUser() << ";" << messages->getVertex(i).getText() << endl;
 			}
 			cout << "Foro guardado" << endl;
@@ -69,7 +69,7 @@ public:
 	}
 	//agregar mensaje
 	void addMessage(Student* u, string msg) {
-		Message message(to_string(this->size + 1), u->getId(), "Student add: " + msg);
+		Message message(to_string(this->size), u->getId(), "Student add: " + msg);
 		messages->addNode(message);
 		if (this->size > 0) {
 			messages->addEdge(messages->getVertex(this->size - 1), messages->getVertex(this->size));
@@ -81,7 +81,7 @@ public:
 		Message message(to_string(this->size + 1), p->getId(), "Professor add: " + msg);
 		messages->addNode(message);
 		if (this->size > 0) {
-			messages->addEdge(messages->getVertex(this->size - 1), messages->getVertex(this->size));
+			messages->addEdge(messages->getVertex(this->size), messages->getVertex(this->size));
 		}
 		this->size++;
 		saveForum();
@@ -93,7 +93,7 @@ public:
 		}
 		else
 		{
-			for (int i = 0; i < this->size; i++) {
+			for (int i = 0; i < this->size-1; i++) {
 				cout << messages->getVertex(i).getId() << " " << messages->getVertex(i).getCodeUser() << " " << messages->getVertex(i).getText() << endl;
 			}
 		}
