@@ -78,7 +78,7 @@
       <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
     <ClInclude Include="CourseManager.hpp">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +99,7 @@
     <None Include="books.csv">
       <Filter>Archivos de recursos</Filter>
     </None>
-    <None Include="..\..\..\..\..\Desktop\courses.csv">
+    <None Include="courses.txt">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>

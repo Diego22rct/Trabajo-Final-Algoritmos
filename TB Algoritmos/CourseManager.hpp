@@ -5,6 +5,7 @@
 #include "HT.hpp"
 #include <string>
 #include <fstream>
+#include <sstream>
 using namespace std;
 
 class CourseManager {
@@ -13,7 +14,7 @@ private:
 
 public:
     CourseManager(int capacity) {
-        courses = new HT<Course>(capacity);
+        courses = new HT<Course>(10);
         loadCourses();
     }
 
@@ -30,7 +31,7 @@ public:
     }
 
     void removeCourse(string courseCode) {
-        courses->remove(courseCode);
+        //courses->remove(courseCode);
     }
 
     void displayCourses() {
@@ -40,18 +41,19 @@ public:
     }
 
     void loadCourses() {
-        ifstream file("courses.csv", ios::in);
+        ifstream file("courses.txt");
         string idx, name, code;
+
         if (file.is_open()) {
-            while (getline(file, idx, ';') && getline(file, name, ';') && getline(file, code, ';')) {
-                Course course(stoi(idx), name, code);
-                addCourse(code, course);
-            }
-            file.close();
-        }
-        else {
-            cout << "Error opening file" << endl;
-        }
+            while (getline(file, idx, ','), getline(file, name, ','), getline(file, code)) {
+                if (!file.eof()) {
+                    Course course(name, code);
+                    courses->insert(code, course);
+                    cout << "Cargando curso: " << course.getCourseName() << endl;
+                }
+			}
+			file.close();
+		}
     }
 };
 

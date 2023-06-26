@@ -69,6 +69,7 @@ public:
     
         forum = Forum("Forum1");
         library = Library(150);
+
     }
 
     ~Registry() {

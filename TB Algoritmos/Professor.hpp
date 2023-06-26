@@ -19,7 +19,7 @@ public:
             student->getEnrolledCourses().forEach([](Course* course) {
 				cout << "Course name: " << course->getCourseName() << endl;
 				cout << "Course code: " << course->getCourseCode() << endl;
-				cout << "Final grade: " << course->getFinalGrade() << endl;
+				//cout << "Final grade: " << course->getFinalGrade() << endl;
 				cout << "-------------------\n";
 				});
         });
@@ -38,7 +38,7 @@ public:
 					[courseCode](Course* course) { return course->getCourseCode() == courseCode; },
                     [&courseFound, newGrade](Course* course) {
 						courseFound = true;
-						course->setGrade(newGrade);
+						//course->setGrade(newGrade);
 						cout << "Grade modified correctly." << endl;
 					}
 				);
@@ -61,7 +61,7 @@ public:
 				[courseCode](Course* course) { return course->getCourseCode() == courseCode; },
                 [&courseFound](Course* course) {
 					courseFound = true;
-					course->setGrade(0);
+					//course->setGrade(0);
 				}
 			);
 		});

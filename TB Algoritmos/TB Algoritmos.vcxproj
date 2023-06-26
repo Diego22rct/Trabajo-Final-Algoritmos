@@ -153,9 +153,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\..\Desktop\courses.csv" />
     <None Include="admins.csv" />
     <None Include="books.csv" />
+    <None Include="courses.txt" />
     <None Include="professors.csv" />
     <None Include="students.csv" />
   </ItemGroup>

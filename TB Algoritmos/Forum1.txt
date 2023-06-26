@@ -6,3 +6,6 @@
 6;PC7441486;Professor add: beunas 
 7;U1008540;Student add: hola 
 8;U1008540;Student add: saque 0
+9;U20221A715;Student add: hola
+10;U20221A715;Student add: jaskdajl
+11;PC3159178;Professor add: alskdjasj 

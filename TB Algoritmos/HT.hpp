@@ -1,5 +1,5 @@
-#ifndef _HT_HPP_
-#define _HT_HPP
+#ifndef __HT_HPP__
+#define __HT_HPP__
 #include "DLL.hpp"
 #include <string>
 #include <functional>

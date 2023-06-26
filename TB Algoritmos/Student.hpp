@@ -4,6 +4,8 @@
 #include "Course.hpp"
 #include "DLL.hpp"
 #include "HT.hpp"
+#include "CourseManager.hpp"
+
 #include <fstream>
 class Student : public User {
 private:
@@ -11,11 +13,15 @@ private:
     string major;
     DLL<Course*> enrolledCourses;
     DLL<Course*> availableCourses;
+    CourseManager* courseManager;
+
 public:
     Student(string name = " ", string id = " ", string email = " ", string major = " ", int cycle = 0, string password = " ")
         : User(id, name, email, password, "alumno"), major(major), cycle(cycle) {
-        loadCourses();
+        //loadCourses();
         loadEnrolledCourses();
+        courseManager = new CourseManager(100);
+
     }
     string getMajor() {
         return major;
@@ -26,15 +32,16 @@ public:
     DLL<Course*>& getEnrolledCourses() {
         return enrolledCourses;
     }
-    void loadCourses() {
-        ifstream file("Cursos.txt");
-        string idx, name, code, major;
-        int term;
-        while (getline(file, idx, ','), getline(file, name, ','), getline(file, code, ','), getline(file, major, ','), file >> term) {
-            availableCourses.pushBack(new Course(stoi(idx), name, code, major, term));
-        }
-        file.close();
-    }
+    //void loadCourses() {
+    //    ifstream file("courses.csv");
+    //    string idx, name, code, major;
+    //    int term;
+    //    while (getline(file, idx, ','), getline(file, name, ','), getline(file, code, ','), getline(file, major, ','), file >> term) {
+    //        availableCourses.pushBack(new Course(stoi(idx), name, code, major, term));
+    //    }
+    //    file.close();
+    //}
+
     void saveCourse(Course* course) {
         ofstream file;
         file.open("cursos_matriculados.txt", ios::app);
@@ -46,7 +53,7 @@ public:
         string name, courseCode, courseName;
         while (getline(file, name, ','), getline(file, courseCode, ','), getline(file, courseName)) {
             if (name == getName()) {
-                Course* course = new Course(0, courseName, courseCode, "", 0);
+                Course* course = new Course(courseName, courseCode);
                 enrolledCourses.pushBack(course);
             }
         }
@@ -60,7 +67,7 @@ public:
             if (studentName == getName()) {
                 enrolledCourses.forEach([&](Course* c) {
                     if (c->getCourseCode() == courseCode) {
-                        c->setGrade(finalGrade);
+                       // c->setGrade(finalGrade);
                     }
                     });
             }
@@ -68,6 +75,7 @@ public:
         file.close();
     }
     void showCourses() {
+        courseManager->displayCourses();
         availableCourses.forEach([](Course* c) {
             cout << c->toString() << endl;
             });
@@ -133,7 +141,7 @@ public:
         }
         else {
             enrolledCourses.forEach([](Course* c) {
-                cout << "Course name: " << c->getCourseName() << ", Final grade: " << c->getFinalGrade() << endl;
+                cout << "Course name: " << c->getCourseName() <<  endl;
                 });
         }
     }
