@@ -249,6 +249,13 @@ public:
                 string id;
                 cin >> id;
                 Student* keyStudent = new Student("", id, "", "", 0, "");
+                /*Student* foundStudent = studentTree.find(keyStudent);
+                if (foundStudent) {
+                    cout << "Alumno encontrado: " << foundStudent->getName() << " (" << foundStudent->getId() << ")\n";
+                }
+                else {
+                    cout << "Alumno no encontrado.\n";
+                }*/
                 auto s = studentTree.find(keyStudent);
                 if (s != nullptr) {
 					cout << "Alumno encontrado: " << s->getName() << " (" << s->getId() << ")\n";
