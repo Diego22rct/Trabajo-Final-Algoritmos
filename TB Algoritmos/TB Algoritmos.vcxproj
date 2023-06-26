@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrator.hpp" />
+    <ClInclude Include="Book.hpp" />
     <ClInclude Include="Forum.hpp" />
     <ClInclude Include="Graph.hpp" />
     <ClInclude Include="Library.hpp" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="admins.csv" />
+    <None Include="books.csv" />
     <None Include="professors.csv" />
     <None Include="students.csv" />
   </ItemGroup>

@@ -6,6 +6,7 @@
 #include "Administrator.hpp"
 #include "Forum.hpp"
 #include "BST.hpp"
+#include "Library.hpp"
 using namespace std;
 
 class Registry {
@@ -17,6 +18,7 @@ private:
     BST<Professor*> professorTree;
     BST<Administrator*> administratorTree;
     Forum forum;
+    Library library;
 public:
     Registry() :
         studentTree(
@@ -66,6 +68,7 @@ public:
         loadAdmins();
     
         forum = Forum("Forum1");
+        library = Library(0, 150);
     }
 
     ~Registry() {
@@ -428,7 +431,8 @@ public:
             cout << "4. Ver notas de los cursos\n";
             cout << "5. Retirarse de un curso\n";
             cout << "6. Ingresar al foro\n";
-            cout << "7. Salir\n";
+            cout << "7. Ver Biblioteca\n";
+            cout << "8. Salir\n";
             cout << "Ingrese una opcion: ";
             cin >> option;
 
@@ -468,13 +472,20 @@ public:
                 getline(cin >> ws, message);
                 forum.addMessage(student, message);
             }break;
-            case 7:
+            case 7: {
+                cout << "Biblioteca" << endl;
+                library.showBooks();
+                string codeBook;
+                cout << "Ingrese el codigo del libro que desea ver: ";
+
+            } break;
+            case 8:
                 cout << "Saliendo del programa...\n";
                 break;
             default:
                 cout << "Opcion invalida. Intente de nuevo.\n";
             }
-        } while (option != 7);
+        } while (option != 8);
     }
 
     // Inicio Programa
