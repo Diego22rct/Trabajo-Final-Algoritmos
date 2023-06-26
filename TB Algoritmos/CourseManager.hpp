@@ -11,7 +11,7 @@ using namespace std;
 class CourseManager {
 private:
     HT<Course>* courses;
-
+    
 public:
     CourseManager(){
         courses = new HT<Course>(10);
@@ -20,7 +20,6 @@ public:
     }
 
     ~CourseManager() {
-        delete courses;
     }
 
     void addCourse(string courseCode, Course course) {
@@ -36,9 +35,11 @@ public:
     }
 
     void displayCourses() {
-        this->courses->display([](Course course) {
-            cout << course.toString() << endl;
-            });
+        //courses->display(
+        //    [](Course course) {
+        //        cout << course << endl;
+        //    }
+        //);
     }
 
     void loadCourses() {
