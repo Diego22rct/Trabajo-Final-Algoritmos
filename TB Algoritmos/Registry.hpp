@@ -298,7 +298,7 @@ public:
                 int cycle;
                 cout << "Ingrese el nombre: ";
                 cin >> name;
-                cout << "Ingrese el código: ";
+                cout << "Ingrese el cï¿½digo: ";
                 cin >> id;
                 cout << "Ingrese el correo: ";
                 cin >> email;
@@ -306,7 +306,7 @@ public:
                 cin >> major;
                 cout << "Ingrese el ciclo: ";
                 cin >> cycle;
-                cout << "Ingrese la contraseña: ";
+                cout << "Ingrese la contraseï¿½a: ";
                 cin >> password;
 
                 Student* newStudent = new Student(name, id, email, major, cycle, password);
@@ -320,11 +320,11 @@ public:
                 string name, id, email, password;
                 cout << "Ingrese el nombre: ";
                 cin >> name;
-                cout << "Ingrese el código: ";
+                cout << "Ingrese el cï¿½digo: ";
                 cin >> id;
                 cout << "Ingrese el correo: ";
                 cin >> email;
-                cout << "Ingrese la contraseña: ";
+                cout << "Ingrese la contraseï¿½a: ";
                 cin >> password;
 
                 Professor* newProfessor = new Professor(id, name, email, password);
@@ -336,7 +336,7 @@ public:
             case 8: {
                 cout << "Eliminar un alumno:\n";
                 string codeStudent;
-                cout << "Ingrese el código del alumno: ";
+                cout << "Ingrese el cï¿½digo del alumno: ";
                 cin >> codeStudent;
 
                 Student* studentToDelete = new Student("", codeStudent, "", "", 0, "");
@@ -347,7 +347,7 @@ public:
             case 9: {
                 cout << "Eliminar un profesor:\n";
                 string codeProfessor;
-                cout << "Ingrese el código del profesor: ";
+                cout << "Ingrese el cï¿½digo del profesor: ";
                 cin >> codeProfessor;
 
                 Professor* professorToDelete = new Professor(codeProfessor," ", "", "");
@@ -384,24 +384,24 @@ public:
                 break;
             }
             case 2: {
-                professor->viewCoursesStudents(students);
+                //professor->viewCoursesStudents(students);
                 string codeCourse, codeStudent;
                 double newGrade;
-                cout << "Ingrese el código del alumno: ";
+                cout << "Ingrese el cï¿½digo del alumno: ";
                 cin >> codeStudent;
-                cout << "Ingrese el código del curso: ";
+                cout << "Ingrese el cï¿½digo del curso: ";
                 cin >> codeCourse;
                 cout << "Ingrese la nueva nota: ";
                 cin >> newGrade;
-                professor->modifyStudentGrade(students, codeStudent, codeCourse, newGrade);
+                //professor->modifyStudentGrade(students, codeStudent, codeCourse, newGrade);
                 break;
             }
             case 3: {
-                professor->viewCoursesStudents(students);
+                //professor->viewCoursesStudents(students);
                 string codeCourse;
-                cout << "Ingrese el código del curso: ";
+                cout << "Ingrese el cï¿½digo del curso: ";
                 cin >> codeCourse;
-                professor->removeStudentGrade(students, codeCourse);
+                //professor->removeStudentGrade(students, codeCourse);
                 break;
             }
             case 4: {

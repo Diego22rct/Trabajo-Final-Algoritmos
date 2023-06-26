@@ -1,11 +1,8 @@
 #ifndef __LIBRARY_HPP__
 #define __LIBRARY_HPP__
-
 #include "Book.hpp"
 #include "HT.hpp"
-
 #include <fstream>
-#include <stdexcept>
 
 class Library
 {
@@ -45,7 +42,7 @@ public:
 		}
 		else
 		{
-			throw runtime_error("Error opening file");
+			throw "Error opening file";
 		}
 	}
 

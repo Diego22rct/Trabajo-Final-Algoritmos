@@ -3,6 +3,7 @@
 #include "User.hpp"
 #include "Course.hpp"
 #include "DLL.hpp"
+#include "HT.hpp"
 #include <fstream>
 class Student : public User {
 private:
