@@ -127,13 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Cursos.txt" />
     <Text Include="cursos_matriculados.txt" />
     <Text Include="Forum1.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrator.hpp" />
     <ClInclude Include="Book.hpp" />
+    <ClInclude Include="CourseManager.hpp" />
     <ClInclude Include="Forum.hpp" />
     <ClInclude Include="Graph.hpp" />
     <ClInclude Include="Library.hpp" />
@@ -153,6 +153,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\..\Desktop\courses.csv" />
     <None Include="admins.csv" />
     <None Include="books.csv" />
     <None Include="professors.csv" />

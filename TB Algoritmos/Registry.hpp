@@ -68,7 +68,7 @@ public:
         loadAdmins();
     
         forum = Forum("Forum1");
-        library = Library(0, 150);
+        library = Library(150);
     }
 
     ~Registry() {
@@ -438,14 +438,14 @@ public:
 
             switch (option) {
             case 1:
-                student->showCourses();
+                student->showAvailableCourses();
                 break;
             case 2:
-                student->showEnrolledCourses();
+                //student->showEnrolledCourses();
                 break;
             case 3: {
                 cout << "Cursos disponibles:\n";
-                student->showCourses();
+                //student->showCourses();
                 string codigoCurso;
                 cout << "Ingrese el codigo del curso: ";
                 cin >> codigoCurso;
@@ -453,15 +453,15 @@ public:
                 break;
             }
             case 4:
-                student->checkGrades();
+                //student->checkGrades();
                 break;
             case 5: {
                 cout << "Cursos matriculados:\n";
-                student->showEnrolledCourses();
+                //student->showEnrolledCourses();
                 string codeCourse;
                 cout << "Ingrese el codigo del curso que desea retirar: ";
                 cin >> codeCourse;
-                student->withdrawCourse();
+                //student->withdrawCourse();
                 break;
             }
             case 6: {

@@ -52,16 +52,14 @@ public:
     }
 
     void insertAt(T value, int pos) {
-        if (pos < 0 || pos > _size) return;
+        if (pos < 0 || pos > _size) throw "Invalid position >:V";
         if (pos == 0) { pushFront(value); return; }
         if (pos == _size) { pushBack(value); return; }
         Node* aux = this->_start;
         Node* newNode = new Node(value);
         for (int i = 0; i < pos - 1; ++i) aux = aux->next;
-
         newNode->next = aux->next;
         aux->next->back = newNode;
-
         aux->next = newNode;
         newNode->back = aux;
 
@@ -71,7 +69,7 @@ public:
     void display(function<void(T)> show) {
         Node* aux = this->_start;
         while (aux) {
-            _show(aux->value);
+            show(aux->value);
             aux = aux->next;
         }
     }
@@ -83,7 +81,7 @@ public:
     }
 
     void popBack() {
-        if (this->_size == 0) return;
+        if (this->_size == 0) throw "Cannot erase in empty list";
         if (this->_size == 1) {
             delete _start;
             _start = _end = nullptr;
@@ -225,7 +223,7 @@ public:
         --_size;
     }
 
-    void modifyAt(int pos, function<void(T&)> modify) {
+    void modifyAt(int pos, std::function<void(T&)> modify) {
         if (pos < 0 || pos >= _size) return;
         Node* aux = _start;
         for (size_t i = 0; i < pos; ++i) aux = aux->next;
@@ -242,7 +240,6 @@ public:
 
     T getByCriteria(function<bool(T)> criteria) {
         Node* aux = this->_start;
-        if (_start == nullptr) return T();
         while (aux) {
             if (criteria(aux->value)) return aux->value;
             aux = aux->next;

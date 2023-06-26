@@ -5,15 +5,16 @@
 #include "HT.hpp"
 
 #include <fstream>
+#include <stdexcept>
 
 class Library
 {
 private:
 	HT<Book*>* books;
-	size_t quantity;
 	size_t capacity;
+
 public:
-	Library(size_t quantity = 0, size_t capacity = 100) : quantity(quantity), capacity(capacity)
+	Library(size_t capacity = 100) : capacity(capacity)
 	{
 		books = new HT<Book*>(capacity);
 		readFile();
@@ -22,20 +23,22 @@ public:
 	~Library()
 	{
 		saveFile();
+		books->forEach([](Book* book) {
+			delete book;
+			});
 		delete books;
 	}
+
 	void readFile() {
-		//Delimiter ;
 		ifstream file("books.csv");
 		string line;
 		string titleF;
 		string nameF;
 		string lastNameF;
 		string dateF;
+
 		if (file.is_open()) {
-			while (file.eof())
-			{
-				getline(file, titleF, ';');
+			while (getline(file, titleF, ';')) {
 				getline(file, nameF, ';');
 				getline(file, lastNameF, ';');
 				getline(file, dateF, '\n');
@@ -46,24 +49,22 @@ public:
 		}
 		else
 		{
-			cout << "Error opening file" << endl;
+			throw runtime_error("Error opening file");
 		}
-		file.close();
 	}
 
 	void saveFile() {
 		ofstream file("books.csv");
 		if (file.is_open()) {
-			auto show = [&file](Book* book) -> void {
+			books->forEach([&file](Book* book) -> void {
 				file << book->getTitle() << ";" << book->getName() << ";" << book->getLastName() << ";" << book->getDate() << endl;
-			};
+				});
 			cout << "File saved" << endl;
 		}
 		else
 		{
-			cout << "Error opening file" << endl;
+			throw runtime_error("Error opening file");
 		}
-		file.close();
 	}
 
 	void addBook(Book* book) {
@@ -72,7 +73,7 @@ public:
 
 	void showBooks() {
 		books->display([](Book* book) -> void {
-			cout << book << endl;
+			cout << *book << endl;
 			});
 	}
 };

@@ -1,6 +1,7 @@
 #ifndef __HT_HPP__
 #define __HT_HPP__
 #include <string>
+#include <functional>
 #include <cmath>
 #include "DLL.hpp"
 using namespace std;
@@ -11,6 +12,8 @@ private:
     struct Element {
         string key;
         T value;
+
+        Element(string key = "", T value = T{}) : key(key), value(value) { }
     };
 
     DLL<Element>** _hashTable;
@@ -20,7 +23,7 @@ private:
     int _hashFunction(string key) {
         int res = 0;
         for (unsigned int i = 0; i < key.length(); ++i)
-            res += static_cast<int>(key[i]) * (i + 1);
+            res += pow(static_cast<int>(key[i]), i + 1);
         return res % _capacity;
     }
 
@@ -40,53 +43,102 @@ public:
         }
     }
 
+    ~HT() {
+        for (size_t i = 0; i < _capacity; ++i) {
+            delete _hashTable[i];
+        }
+        delete[] _hashTable;
+    }
+
     void insert(string key, T value) {
         if (_size == _capacity) throw "Hash table is full";
         int index = _hashFunction(key);
-        if (_hashTable[index] == nullptr) {
-            _hashTable[index] = new DLL<Element>();
-        }
-        _hashTable[index]->insertAt(Element{ key, value }, _hashTable[index]->size() / 2);
+        if (_hashTable[index] == nullptr) _hashTable[index] = new DoublyLinkedList<Element>();
+        int pos = _hashTable[index]->size() / 2;
+        _hashTable[index]->insertAt(Element{ key,value }, pos);
         ++_size;
     }
 
-    T& search(T& key) {
+    void forEach(function<void(T)> func) {
+        for (size_t i = 0; i < _capacity; ++i) {
+            if (_hashTable[i] != nullptr) {
+                _hashTable[i]->forEach(func);
+            }
+        }
+    }
+
+    T& search(string key) {
         int index = _hashFunction(key);
         auto element = _hashTable[index]->getByCriteria([&](Element e) -> bool {
             return e.key == key;
             });
         if (element.key != key) {
-            throw "Key not found";
+            throw runtime_error("Key not found");
         }
         return element.value;
     }
 
-    T operator[](string key) {
-        return search(key);
+    T& operator[](string key) {
+        int index = _hashFunction(key);
+        auto list = _hashTable[index];
+        T value = _hashTable[index]->getByCriteria([&](Element e) -> bool {
+            return e.key == key;
+            });
+        return value;
     }
 
     T getCopy(string key) {
         int index = _hashFunction(key);
-        auto element = _hashTable[index]->getByCriteria([&](Element e) -> bool {
-			return e.key == key;
-			});
-        if (element.key != key) {
-			throw "Key not found";
-		}
-		return element.value;
+        auto list = _hashTable[index];
+        T value = _hashTable[index]->getByCriteria([&](Element e) -> bool {
+            return e.key == key;
+            });
+        return value;
     }
 
     void display(void (*show)(T)) {
-        for (int i = 1; i < _capacity; ++i) {
-            auto copy = getCopy(to_string(i));
-            if (copy != nullptr) {
-				cout << i << ": ";
-				show(copy);
-				cout << endl;
-			}
+        for (unsigned int i = 0; i < _capacity; ++i) {
+            cout << "\nPos: " << i << ": ";
+            if (_hashTable[i] == nullptr) {
+                cout << "nullptr";
+                continue;
+            }
+            _hashTable[i]->display([&](Element a) -> void {
+                show(a.value);
+                });
         }
     }
 
+    void display1(function<void(T&)> show) {
+        for (unsigned int i = 0; i < _capacity; ++i) {
+            std::cout << "\nPos: " << i << ": ";
+            if (_hashTable[i] == nullptr) {
+                std::cout << "nullptr";
+                continue;
+            }
+            _hashTable[i]->display([&](Element a) -> void {
+                show(a.value);
+                });
+        }
+    }
+
+    void remove(string key) {
+        int index = _hashFunction(key);
+        if (_hashTable[index] == nullptr) {
+            throw runtime_error("Key not found");
+        }
+        else {
+            bool removed = _hashTable[index]->popElementIf([&](Element e) -> bool {
+                return e.key == key;
+                });
+            if (!removed) {
+                throw runtime_error("Key not found");
+            }
+            else {
+                --_size;
+            }
+        }
+    }
 };
 
 #endif

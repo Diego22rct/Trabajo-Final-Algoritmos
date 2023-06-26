@@ -8,9 +8,6 @@ private:
     T* data;
     int capacity;
     int length;
-
-
-
 public:
     Vector() {
         capacity = 10;

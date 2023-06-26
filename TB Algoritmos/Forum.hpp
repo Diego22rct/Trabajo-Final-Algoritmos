@@ -25,7 +25,6 @@ public:
 	}
 	~Forum() {}
 
-	//Leer foro
 	void readForum() {
 		ifstream file;
 		file.open("Forum1.txt", ios::in);
@@ -51,7 +50,7 @@ public:
 		}
 		file.close();
 	}
-	//guardar foro
+
 	void saveForum() {
 		//sobre escribir todo el archivo
 		ofstream file;
@@ -67,7 +66,7 @@ public:
 		}
 		file.close();
 	}
-	//agregar mensaje
+
 	void addMessage(Student* u, string msg) {
 		Message message(to_string(this->size), u->getId(), "Student add: " + msg);
 		messages->addNode(message);
@@ -77,6 +76,7 @@ public:
 		this->size++;
 		saveForum();
 	}
+
 	void addMessageProfessor(Professor* p, string msg) {
 		Message message(to_string(this->size + 1), p->getId(), "Professor add: " + msg);
 		messages->addNode(message);
@@ -98,6 +98,7 @@ public:
 			}
 		}
 	}
+
 	string getforumName() {
 		return forumName;
 	}

@@ -8,48 +8,50 @@ using namespace std;
 class Book
 {
 private:
-	string title;
-	struct Autor
-	{
-		string name;
-		string lastName;
-	};
-	string date;
-	Autor *autor;
+    string title;
+    struct Author
+    {
+        string name;
+        string lastName;
+    };
+    string date;
+    Author* author;
 
 public:
-	Book(string title = "", string name = "", string lastName = "", string date = "") : title(title), date(date)
-	{
-		autor = new Autor;
-		autor->name = name;
-		autor->lastName = lastName;
-	}
-	~Book()
-	{
-	}
+    Book(string title = "", string name = "", string lastName = "", string date = "") : title(title), date(date)
+    {
+        author = new Author;
+        author->name = name;
+        author->lastName = lastName;
+    }
 
-	friend ostream& operator<<(ostream& os, const Book& book)
-	{
-		os << book.title << " " << book.date << endl;
-		return os;
-	}
+    ~Book()
+    {
+        delete author;
+    }
 
-	bool operator==(Book other)
-	{
-		return title.compare(other.title) == 0;
-	}
+    friend ostream& operator<<(ostream& os, const Book& book)
+    {
+        os << book.title << " " << book.date << " " << book.author->name << " " << book.author->lastName << endl;
+        return os;
+    }
 
-	//setters and getters
+    bool operator==(Book other)
+    {
+        return title.compare(other.title) == 0 && author->name == other.author->name && author->lastName == other.author->lastName && date == other.date;
+    }
 
-	void setTitle(string title) { this->title = title; }
-	void setDate(string date) { this->date = date; }
+    // setters and getters
 
+    void setTitle(string title) { this->title = title; }
+    void setDate(string date) { this->date = date; }
 
-	string getTitle() { return title; }
-	string getDate() { return date; }
-	string getName() { return autor->name; }
-	string getLastName() { return autor->lastName; }
+    string getTitle() { return title; }
+    string getDate() { return date; }
+    string getName() { return author->name; }
+    string getLastName() { return author->lastName; }
 };
+
 
 
 #endif // !__BOOK_HPP__
