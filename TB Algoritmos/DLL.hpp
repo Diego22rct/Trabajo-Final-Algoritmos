@@ -81,19 +81,19 @@ public:
     }
 
     void popBack() {
-        if (this->_size == 0) throw "Cannot erase in empty list";
-        if (this->_size == 1) {
-            delete _start;
-            _start = _end = nullptr;
-            _size = 0;
-            return;
+        if (this->_size == 0) throw "Cannot erase in empty list"; // 1
+        if (this->_size == 1) { // 1 + 2 +1 +1 -> 5 
+            delete _start; // 1
+            _start = _end = nullptr;// 2
+            _size = 0; // 1
+            return; // 1
         }
-        _end = _end->back;
-        _end->next->back = nullptr;
-        delete _end->next;
-        _end->next = nullptr;
-        --_size;
-    }
+        _end = _end->back; // 2
+        _end->next->back = nullptr; // 3
+        delete _end->next; // 1
+        _end->next = nullptr; // 2
+        --_size; // 2
+    }// 1 + 5 + 2 + 3 + 1 +2 = 14
 
     void popFront() {
         if (this->_size == 0) return;
@@ -119,17 +119,19 @@ public:
     }
 
     void findAndApply(function<bool(T)> findCriteria, function<void(T)> action) {
-        Node* aux = _start;
-        while (aux != nullptr) {
-            if (findCriteria(aux->value)) {
-                action(aux->value);
-                return;
+        Node* aux = _start; // 1
+        while (aux != nullptr) { // n(1 MaxInterno) ->  n(1+ 3 + 2)
+            if (findCriteria(aux->value)) { // 1 -> 3
+                action(aux->value); // 1
+                return; // 1
             }
-            aux = aux->next;
+            aux = aux->next; // 2
         }
-        cout << "Element not found in the list" << endl;
+        cout << "Element not found in the list" << endl; // 2
     }
-
+    // findAndApply 
+    // 1+n(6)+2
+    // O(n)
     void popAllElementsIf(function<bool(T)> comparacion) {
         Node* currentNode = _start;
         Node* previousNode = nullptr;
@@ -201,27 +203,30 @@ public:
     }
 
     void eraseAt(int pos) {
-        if (pos < 0 || pos >= _size) return;
-        if (pos == 0) {
-            popFront();
-            return;
+        if (pos < 0 || pos >= _size) return; // 1 + 1 + 1 +1
+        if (pos == 0) { // 1
+            popFront(); // (14)
+            return; // 1
         }
-        if (pos == _size - 1) {
-            popBack();
-            return;
+        if (pos == _size - 1) { // 1 + 1
+            popBack();  // (14)
+            return; // 1
         }
-        Node* aux = _start;
-        for (unsigned int i = 0; i < pos - 1; ++i) aux = aux->next;
-        Node* toErase = aux->next;
+        Node* aux = _start; // 1
+        for (unsigned int i = 0; i < pos - 1; ++i) aux = aux->next; // n(2+ 2 + 2) -> n(6)
+        Node* toErase = aux->next; // 2
 
-        aux->next = aux->next->next;
-        aux->next->back = aux->next->back->back;
+        aux->next = aux->next->next; // 4
+        aux->next->back = aux->next->back->back; // 6
 
-        toErase->next = toErase->back = nullptr;
+        toErase->next = toErase->back = nullptr; // 4
 
-        delete toErase;
-        --_size;
+        delete toErase; // 1
+        --_size; // 2
     }
+    // eraseAt
+    //4+ 16+ 17+1+n(6)+2+4+6+4+1+2 = 57 + n(6)
+    //O(n)
 
     void modifyAt(int pos, std::function<void(T&)> modify) {
         if (pos < 0 || pos >= _size) return;
