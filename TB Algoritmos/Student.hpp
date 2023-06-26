@@ -4,16 +4,19 @@
 #include "Course.hpp"
 #include "DLL.hpp"
 #include "HT.hpp"
+
 #include <fstream>
 class Student : public User {
 private:
     int cycle;
     string major;
-    HT<Course>* enrolledCourses;
+    DLL<Course*> enrolledCourses;
+    DLL<Course*> availableCourses;
 
 public:
     Student(string name = " ", string id = " ", string email = " ", string major = " ", int cycle = 0, string password = " ")
         : User(id, name, email, password, "alumno"), major(major), cycle(cycle) {
+        //loadCourses();
         loadEnrolledCourses();
 
     }
@@ -23,6 +26,18 @@ public:
     int getCycle() {
         return cycle;
     }
+    DLL<Course*>& getEnrolledCourses() {
+        return enrolledCourses;
+    }
+    //void loadCourses() {
+    //    ifstream file("courses.csv");
+    //    string idx, name, code, major;
+    //    int term;
+    //    while (getline(file, idx, ','), getline(file, name, ','), getline(file, code, ','), getline(file, major, ','), file >> term) {
+    //        availableCourses.pushBack(new Course(stoi(idx), name, code, major, term));
+    //    }
+    //    file.close();
+    //}
 
     void saveCourse(Course* course) {
         ofstream file;
@@ -116,6 +131,24 @@ public:
             cout << c->toString() << endl;
             });
     }
-
+    void checkGrades() {
+        if (enrolledCourses.isEmpty()) {
+            cout << "No courses enrolled" << endl;
+        }
+        else {
+            enrolledCourses.forEach([](Course* c) {
+                cout << "Course name: " << c->getCourseName() <<  endl;
+                });
+        }
+    }
+    void addCourseByProfessor(Course* course) {
+        enrolledCourses.pushBack(course);
+    }
+    bool removeCourseByProfessor(string courseCode) {
+        bool courseRemoved = enrolledCourses.popElementIf([&](Course* c) {
+            return c->getCourseCode() == courseCode;
+            });
+        return courseRemoved;
+    }
 };
 #endif // __STUDENT_HPP__
