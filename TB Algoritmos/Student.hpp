@@ -3,11 +3,7 @@
 #include "User.hpp"
 #include "Course.hpp"
 #include "DLL.hpp"
-<<<<<<< HEAD
-=======
 #include "HT.hpp"
-
->>>>>>> 341dc184f5eae5f3fa60cd9588769cf09684388d
 #include <fstream>
 
 class Student : public User {
@@ -20,11 +16,6 @@ private:
 public:
     Student(string name = " ", string id = " ", string email = " ", string major = " ", int cycle = 0, string password = " ")
         : User(id, name, email, password, "alumno"), major(major), cycle(cycle) {
-<<<<<<< HEAD
-        loadCourses();
-=======
-        //loadCourses();
->>>>>>> 341dc184f5eae5f3fa60cd9588769cf09684388d
         loadEnrolledCourses();
     }
 
@@ -147,41 +138,7 @@ public:
             cout << c->toString() << endl;
             });
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 341dc184f5eae5f3fa60cd9588769cf09684388d
-    void checkGrades() {
-        if (enrolledCourses.isEmpty()) {
-            cout << "No courses enrolled" << endl;
-        }
-        else {
-            enrolledCourses.forEach([](Course* c) {
-<<<<<<< HEAD
-                cout << "Course name: " << c->getCourseName() << ", Final grade: " << c->getFinalGrade() << endl;
-                });
-        }
-    }
-
-    void addCourseByProfessor(Course* course) {
-        enrolledCourses.pushBack(course);
-    }
-
-=======
-                cout << "Course name: " << c->getCourseName() <<  endl;
-                });
-        }
-    }
-    void addCourseByProfessor(Course* course) {
-        enrolledCourses.pushBack(course);
-    }
->>>>>>> 341dc184f5eae5f3fa60cd9588769cf09684388d
-    bool removeCourseByProfessor(string courseCode) {
-        bool courseRemoved = enrolledCourses.popElementIf([&](Course* c) {
-            return c->getCourseCode() == courseCode;
-            });
-        return courseRemoved;
-    }
 };
 
 #endif // __STUDENT_HPP__
