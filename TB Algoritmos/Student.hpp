@@ -3,6 +3,7 @@
 #include "User.hpp"
 #include "Course.hpp"
 #include "DLL.hpp"
+#include "HT.hpp"
 #include <fstream>
 using namespace std;
 
@@ -17,7 +18,7 @@ public:
     Student(string name = " ", string id = " ", string email = " ", string major = " ", int cycle = 0, string password = " ")
         : User(id, name, email, password, "alumno"), major(major), cycle(cycle) {
         availableCourses = new HT<Course>(300);
-        enrolledCourses = new HT<Course>(100);
+        enrolledCourses = new HT<Course>(300);
     }
 
     ~Student() {

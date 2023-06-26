@@ -1,11 +1,8 @@
 #ifndef __LIBRARY_HPP__
 #define __LIBRARY_HPP__
-
 #include "Book.hpp"
 #include "HT.hpp"
-
 #include <fstream>
-#include <stdexcept>
 
 class Library
 {
@@ -18,15 +15,6 @@ public:
 	{
 		books = new HT<Book*>(capacity);
 		readFile();
-	}
-
-	~Library()
-	{
-		saveFile();
-		books->forEach([](Book* book) {
-			delete book;
-			});
-		delete books;
 	}
 
 	void readFile() {
@@ -49,21 +37,21 @@ public:
 		}
 		else
 		{
-			throw runtime_error("Error opening file");
+			throw "Error opening file";
 		}
 	}
 
 	void saveFile() {
 		ofstream file("books.csv");
 		if (file.is_open()) {
-			books->forEach([&file](Book* book) -> void {
-				file << book->getTitle() << ";" << book->getName() << ";" << book->getLastName() << ";" << book->getDate() << endl;
-				});
+			//books->forEach([&file](Book* book) -> void {
+			//	file << book->getTitle() << ";" << book->getName() << ";" << book->getLastName() << ";" << book->getDate() << endl;
+			//	});
 			cout << "File saved" << endl;
 		}
 		else
 		{
-			throw runtime_error("Error opening file");
+			throw "Error opening file";
 		}
 	}
 

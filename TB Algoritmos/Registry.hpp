@@ -381,11 +381,11 @@ public:
             case 1: {
                 cout << "Cursos dictados:\n";
                 //professor->verListaDeAlumnos(students);
-                professor->viewCoursesStudents(students);
+                //professor->viewCoursesStudents(students);
                 break;
             }
             case 2: {
-                professor->viewCoursesStudents(students);
+                //professor->viewCoursesStudents(students);
                 string codeCourse, codeStudent;
                 double newGrade;
                 cout << "Ingrese el código del alumno: ";
@@ -394,15 +394,15 @@ public:
                 cin >> codeCourse;
                 cout << "Ingrese la nueva nota: ";
                 cin >> newGrade;
-                professor->modifyStudentGrade(students, codeStudent, codeCourse, newGrade);
+                //professor->modifyStudentGrade(students, codeStudent, codeCourse, newGrade);
                 break;
             }
             case 3: {
-                professor->viewCoursesStudents(students);
+                //professor->viewCoursesStudents(students);
                 string codeCourse;
                 cout << "Ingrese el código del curso: ";
                 cin >> codeCourse;
-                professor->removeStudentGrade(students, codeCourse);
+                //professor->removeStudentGrade(students, codeCourse);
                 break;
             }
             case 4: {

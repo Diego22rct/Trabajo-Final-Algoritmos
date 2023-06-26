@@ -36,35 +36,19 @@ private:
     }
 
 public:
-    HT(size_t capacity) : _capacity(capacity), _size(0) {
+    HT(size_t capacity) : _capacity(capacity) {
+        _size = 0;
         _hashTable = new DLL<Element>*[capacity];
-        for (size_t i = 0; i < capacity; ++i) {
-            _hashTable[i] = nullptr;
-        }
-    }
-
-    ~HT() {
-        for (size_t i = 0; i < _capacity; ++i) {
-            delete _hashTable[i];
-        }
-        delete[] _hashTable;
+        for (int i = 0; i < capacity; ++i) _hashTable[i] = nullptr;
     }
 
     void insert(string key, T value) {
         if (_size == _capacity) throw "Hash table is full";
         int index = _hashFunction(key);
-        if (_hashTable[index] == nullptr) _hashTable[index] = new DoublyLinkedList<Element>();
+        if (_hashTable[index] == nullptr) _hashTable[index] = new DLL<Element>();
         int pos = _hashTable[index]->size() / 2;
         _hashTable[index]->insertAt(Element{ key,value }, pos);
         ++_size;
-    }
-
-    void forEach(function<void(T)> func) {
-        for (size_t i = 0; i < _capacity; ++i) {
-            if (_hashTable[i] != nullptr) {
-                _hashTable[i]->forEach(func);
-            }
-        }
     }
 
     T& search(string key) {
@@ -98,9 +82,9 @@ public:
 
     void display(void (*show)(T)) {
         for (unsigned int i = 0; i < _capacity; ++i) {
-            cout << "\nPos: " << i << ": ";
+            std::cout << "\nPos: " << i << ": ";
             if (_hashTable[i] == nullptr) {
-                cout << "nullptr";
+                std::cout << "nullptr";
                 continue;
             }
             _hashTable[i]->display([&](Element a) -> void {

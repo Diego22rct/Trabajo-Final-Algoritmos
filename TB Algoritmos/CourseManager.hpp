@@ -1,5 +1,6 @@
 #ifndef __COURSEMANAGER_HPP__
 #define __COURSEMANAGER_HPP__
+
 #include "Course.hpp"
 #include "HT.hpp"
 #include <string>
@@ -33,16 +34,16 @@ public:
     }
 
     void displayCourses() {
-        courses->display1([](Course& course) {
+        this->courses->display([](Course course) {
             cout << course.toString() << endl;
             });
     }
 
     void loadCourses() {
-        ifstream file("courses.csv");
+        ifstream file("courses.csv", ios::in);
         string idx, name, code;
         if (file.is_open()) {
-            while (file >> idx >> name >> code) {
+            while (getline(file, idx, ';') && getline(file, name, ';') && getline(file, code, ';')) {
                 Course course(stoi(idx), name, code);
                 addCourse(code, course);
             }
