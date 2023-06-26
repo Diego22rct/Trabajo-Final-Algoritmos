@@ -1,2 +1,8 @@
-3;PC7976575;Professor add: asd
-2;U3095086;Student add: lel
+1;U20221A715;Student add: Hola comasldkjaslk
+2;U20221A715;Student add: Goajsldkajs
+3;PC9978409;Professor add: Hola chicos 
+4;PC9978409;Professor add: Hola alumnos
+5;PC7441486;Professor add: holas 
+6;PC7441486;Professor add: beunas 
+7;U1008540;Student add: hola 
+8;U1008540;Student add: saque 0

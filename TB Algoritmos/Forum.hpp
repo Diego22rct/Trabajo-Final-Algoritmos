@@ -1,4 +1,4 @@
-#ifndef _FORUM_HPP_
+ï»¿#ifndef _FORUM_HPP_
 #define _FORUM_HPP_
 #include <iostream>
 #include <string>
@@ -25,9 +25,9 @@ public:
 	}
 	~Forum() {}
 
+	//Leer foro
 	void readForum() {
-		ifstream file;
-		file.open("Forum1.txt", ios::in);
+		ifstream file("Forum1.txt");
 		if (file.fail()) {
 			cout << "No se pudo abrir el archivo" << endl;
 		}
@@ -35,22 +35,17 @@ public:
 			string id;
 			string codeUser;
 			string text;
-			while (!file.eof()) {
-				getline(file, id, ';');
-				getline(file, codeUser, ';');
-				getline(file, text, '\n');
+			while (getline(file, id, ';') && getline(file, codeUser, ';') && getline(file, text)) {
 				Message message(id, codeUser, text);
-
-				//Add to graph
+				// Add to graph
 				messages->addNode(message);
-
-				++this->size;
+				this->size++;
 			}
 			cout << "Foro leido" << endl;
 		}
 		file.close();
 	}
-
+	//guardar foro
 	void saveForum() {
 		//sobre escribir todo el archivo
 		ofstream file;
@@ -59,16 +54,16 @@ public:
 			cout << "No se pudo abrir el archivo" << endl;
 		}
 		else {
-			for (int i = 1; i < this->size; i++) {
+			for (int i = 0; i < this->size; i++) {
 				file << messages->getVertex(i).getId() << ";" << messages->getVertex(i).getCodeUser() << ";" << messages->getVertex(i).getText() << endl;
 			}
 			cout << "Foro guardado" << endl;
 		}
 		file.close();
 	}
-
+	//agregar mensaje
 	void addMessage(Student* u, string msg) {
-		Message message(to_string(this->size), u->getId(), "Student add: " + msg);
+		Message message(to_string(this->size + 1), u->getId(), "Student add: " + msg);
 		messages->addNode(message);
 		if (this->size > 0) {
 			messages->addEdge(messages->getVertex(this->size - 1), messages->getVertex(this->size));
@@ -76,12 +71,11 @@ public:
 		this->size++;
 		saveForum();
 	}
-
 	void addMessageProfessor(Professor* p, string msg) {
 		Message message(to_string(this->size + 1), p->getId(), "Professor add: " + msg);
 		messages->addNode(message);
 		if (this->size > 0) {
-			messages->addEdge(messages->getVertex(this->size), messages->getVertex(this->size));
+			messages->addEdge(messages->getVertex(this->size - 1), messages->getVertex(this->size));
 		}
 		this->size++;
 		saveForum();
@@ -93,15 +87,14 @@ public:
 		}
 		else
 		{
-			for (int i = 0; i < this->size-1; i++) {
+			for (int i = 0; i < this->size; i++) {
 				cout << messages->getVertex(i).getId() << " " << messages->getVertex(i).getCodeUser() << " " << messages->getVertex(i).getText() << endl;
 			}
 		}
 	}
-
 	string getforumName() {
 		return forumName;
 	}
 };
 
-#endif // !_FORUM_HPP_
+#endif //ï¿½!_FORUM_HPP_

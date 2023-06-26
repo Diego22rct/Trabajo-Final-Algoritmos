@@ -52,13 +52,13 @@ public:
                 if (administrator) cout << administrator->getName() << " (" << administrator->getId() << ")\n";
             },
             [](Administrator* a, Administrator* b) -> bool {
-                if (a && b) return a->getId() > b->getId();
-                return false;
-            },
+				if (a && b) return a->getId() > b->getId();
+				return false;
+			},
             [](Administrator* a, Administrator* b) -> bool {
-                if (a && b) return a->getId() == b->getId();
-                return false;
-            }
+				if (a && b) return a->getId() == b->getId();
+				return false;
+			}
         )
     {
         loadStudents();
@@ -90,9 +90,8 @@ public:
     void saveStudents() {
         ofstream file("students.csv", ios::ate);
         if (file.is_open()) {
-            studentDatabase.forEach([&](Student* student) {
-				file << student->getName() << " " << student->getId() << " " << student->getEmail() << " "
-					<< student->getMajor() << " " << student->getCycle() << " " << student->getPassword() << endl;
+            studentTree.roadTree([&](Student* student) {
+                file << student->getName() << " " << student->getId() << " " << student->getEmail() << " " << student->getMajor() << " " << student->getCycle() << " " << student->getPassword() << endl;
 				});
 			file.close();
 		}
@@ -101,10 +100,9 @@ public:
     void saveProfessors() {
         ofstream file("professors.csv", ios::ate);
         if (file.is_open()) {
-            professorDatabase.forEach([&](Professor* professor) {
-				file << professor->getName() << " " << professor->getId() << " " << professor->getEmail() << " "
-					<< " " << professor->getPassword() << endl;
-				});
+            professorTree.roadTree([&](Professor* professor) {
+                file << professor->getName() << " " << professor->getId() << " " << professor->getEmail() << " " << professor->getPassword() << endl;
+                });
 			file.close();
 		}
     }
@@ -112,9 +110,8 @@ public:
     void saveAdmins() {
         ofstream file("admins.csv", ios::ate);
         if (file.is_open()) {
-            adminDatabase.forEach([&](Administrator* admin) {
-				file << admin->getName() << " " << admin->getId() << " " << admin->getEmail() << " "
-					<< " " << admin->getPassword() << endl;
+            administratorTree.roadTree([&](Administrator* admin) {
+				file << admin->getName() << " " << admin->getId() << " " << admin->getEmail() << " " << admin->getPassword() << endl;
 				});
 			file.close();
 		}
@@ -147,6 +144,7 @@ public:
             while (file >> name >> id >> email >> password) {
                 Professor* professor = new Professor(id, name, email, password);
                 professorDatabase.pushBack(professor);
+                professorTree.insert(professor);
             }
             file.close();
         }
@@ -164,6 +162,7 @@ public:
             while (file >> name >> id >> email >> password) {
                 Administrator* admin = new Administrator(id, name, email, password);
                 adminDatabase.pushBack(admin);
+                administratorTree.insert(admin);
             }
             file.close();
         }
@@ -269,7 +268,7 @@ public:
                 cout << "Ingrese el identificador del profesor: ";
                 string id;
                 cin >> id;
-                Professor* keyProfessor = new Professor("", id, "", "");
+                Professor* keyProfessor = new Professor(id,"", "", "");
                 auto p = professorTree.find(keyProfessor);
                 if (p != nullptr) {
                     cout << "Profesor encontrado: " << p->getName() << " (" << p->getId() << ")\n";
@@ -283,7 +282,7 @@ public:
                 cout << "Ingrese el identificador del administrador: ";
                 string id;
                 cin >> id;
-                Administrator* keyAdmin = new Administrator("", id, "", "");
+                Administrator* keyAdmin = new Administrator(id,"","", "");
                 auto a = administratorTree.find(keyAdmin);
                 if (a != nullptr) {
                     cout << "Administrador encontrado: " << a->getName() << " (" << a->getId() << ")\n";
@@ -328,7 +327,7 @@ public:
                 cout << "Ingrese la contraseña: ";
                 cin >> password;
 
-                Professor* newProfessor = new Professor(name, id, email, password);
+                Professor* newProfessor = new Professor(id, name, email, password);
                 professorTree.insert(newProfessor);
                 saveProfessors();
                 cout << "Profesor agregado exitosamente.\n";
@@ -351,7 +350,7 @@ public:
                 cout << "Ingrese el código del profesor: ";
                 cin >> codeProfessor;
 
-                Professor* professorToDelete = new Professor("", codeProfessor, "", "");
+                Professor* professorToDelete = new Professor(codeProfessor," ", "", "");
                 professorTree.remove(professorToDelete);
                 cout << "Profesor eliminado exitosamente.\n";
                 break;
@@ -381,7 +380,7 @@ public:
             case 1: {
                 cout << "Cursos dictados:\n";
                 //professor->verListaDeAlumnos(students);
-                professor->viewCoursesStudents(students);
+                professor->viewCoursesStudents(studentDatabase);
                 break;
             }
             case 2: {
@@ -438,7 +437,7 @@ public:
 
             switch (option) {
             case 1:
-                student->showAvailableCourses();
+                student->showCourses();
                 break;
             case 2:
                 //student->showEnrolledCourses();
@@ -475,9 +474,7 @@ public:
             case 7: {
                 cout << "Biblioteca" << endl;
                 library.showBooks();
-                string codeBook;
-                cout << "Ingrese el codigo del libro que desea ver: ";
-
+                
             } break;
             case 8:
                 cout << "Saliendo del programa...\n";
@@ -501,6 +498,7 @@ public:
             cout << "3. Salir\n";
             cout << "Ingresa una opcion: ";
             cin >> option;
+            //option = 2;
             switch (option) {
             case 1: {
                 string name, id, email, password, role;
@@ -551,10 +549,13 @@ public:
                 string id, password, role;
                 cout << "Ingrese su codigo: ";
                 cin >> id;
+                //id = "PC7654561";
                 cout << "Ingrese su contrasena: ";
                 cin >> password;
+                //password = "LS7AG5VUF";
                 cout << "Ingrese su rol (alumno, profesor, administrador ): ";
                 cin >> role;
+                //role = "administrador";
                 if (!verifyLogin(id, password, role)) {
                     cout << "No se pudo iniciar sesion" << endl;
                 }

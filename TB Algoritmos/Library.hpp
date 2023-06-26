@@ -10,23 +10,19 @@
 class Library
 {
 private:
-	HT<Book*>* books;
+	HT<Book>* books;
 	size_t capacity;
 
 public:
 	Library(size_t capacity = 100) : capacity(capacity)
 	{
-		books = new HT<Book*>(capacity);
+		books = new HT<Book>(capacity);
 		readFile();
 	}
 
 	~Library()
 	{
 		saveFile();
-		books->forEach([](Book* book) {
-			delete book;
-			});
-		delete books;
 	}
 
 	void readFile() {
@@ -42,8 +38,8 @@ public:
 				getline(file, nameF, ';');
 				getline(file, lastNameF, ';');
 				getline(file, dateF, '\n');
-				auto book = new Book(titleF, nameF, lastNameF, dateF);
-				books->insert(book->getTitle(), book);
+				Book book = Book(titleF, nameF, lastNameF, dateF);
+				books->insert(book.getTitle(), book);
 			}
 			cout << "File readed" << endl;
 		}
@@ -54,26 +50,26 @@ public:
 	}
 
 	void saveFile() {
-		ofstream file("books.csv");
-		if (file.is_open()) {
-			books->forEach([&file](Book* book) -> void {
-				file << book->getTitle() << ";" << book->getName() << ";" << book->getLastName() << ";" << book->getDate() << endl;
-				});
-			cout << "File saved" << endl;
-		}
-		else
-		{
-			throw runtime_error("Error opening file");
-		}
+		//ofstream file("books.csv");
+		//if (file.is_open()) {
+		//	books->display([&](Book book) -> void {
+		//		file << book.getTitle() << ";" << book.getName() << ";" << book.getLastName() << ";" << book.getDate() << endl;
+		//		});
+		//	cout << "File saved" << endl;
+		//}
+		//else
+		//{
+		//	throw runtime_error("Error opening file");
+		//}
 	}
 
-	void addBook(Book* book) {
-		books->insert(book->getTitle(), book);
+	void addBook(Book book) {
+		books->insert(book.getTitle(), book);
 	}
 
 	void showBooks() {
-		books->display([](Book* book) -> void {
-			cout << *book << endl;
+		books->display([](Book book) -> void {
+			cout << book << endl;
 			});
 	}
 };

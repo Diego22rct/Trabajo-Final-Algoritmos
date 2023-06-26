@@ -21,9 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Cursos.txt">
-      <Filter>Archivos de recursos</Filter>
-    </Text>
     <Text Include="cursos_matriculados.txt">
       <Filter>Archivos de recursos</Filter>
     </Text>
@@ -80,6 +77,9 @@
     <ClInclude Include="Forum.hpp">
       <Filter>Archivos de encabezado\Entidades</Filter>
     </ClInclude>
+    <ClInclude Include="CourseManager.hpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -97,6 +97,9 @@
       <Filter>Archivos de recursos</Filter>
     </None>
     <None Include="books.csv">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Desktop\courses.csv">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>
