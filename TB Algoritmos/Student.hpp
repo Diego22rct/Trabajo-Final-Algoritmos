@@ -16,6 +16,7 @@ private:
 public:
     Student(string name = " ", string id = " ", string email = " ", string major = " ", int cycle = 0, string password = " ")
         : User(id, name, email, password, "alumno"), major(major), cycle(cycle) {
+        loadCourses();
         loadEnrolledCourses();
     }
 
@@ -29,19 +30,6 @@ public:
     DLL<Course*>& getEnrolledCourses() {
         return enrolledCourses;
     }
-    //void loadCourses() {
-    //    ifstream file("courses.csv");
-    //    string idx, name, code, major;
-    //    int term;
-    //    while (getline(file, idx, ','), getline(file, name, ','), getline(file, code, ','), getline(file, major, ','), file >> term) {
-    //        availableCourses.pushBack(new Course(stoi(idx), name, code, major, term));
-    //    }
-    //    file.close();
-    //}
-
-    DLL<Course*>& getEnrolledCourses() {
-        return enrolledCourses;
-    }
 
     void loadCourses() {
         ifstream file("courses.txt");
@@ -52,16 +40,16 @@ public:
         }
         file.close();
     }
-
+   
     void saveCourse(Course* course) {
         ofstream file;
-        file.open("coursesEnrolled.txt", ios::app);
+        file.open("enrolledCourses.txt", ios::app);
         file << getName() << "," << course->getCourseCode() << "," << course->getCourseName() << "\n";
         file.close();
     }
 
     void loadEnrolledCourses() {
-        ifstream file("coursesEnrolled.txt");
+        ifstream file("enrolledCourses.txt");
         string name, courseCode, courseName;
         while (getline(file, name, ','), getline(file, courseCode, ','), getline(file, courseName)) {
             if (name == getName()) {
@@ -139,6 +127,16 @@ public:
             });
     }
 
+    void addCourseByProfessor(Course* course) {
+        enrolledCourses.pushBack(course);
+    }
+
+    bool removeCourseByProfessor(string courseCode) {
+        bool courseRemoved = enrolledCourses.popElementIf([&](Course* c) {
+            return c->getCourseCode() == courseCode;
+            });
+        return courseRemoved;
+    }
 };
 
 #endif // __STUDENT_HPP__

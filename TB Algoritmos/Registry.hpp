@@ -456,7 +456,7 @@ public:
                 break;
             }
             case 4:
-                student->checkGrades();
+                //student->checkGrades();
                 break;
             case 5: {
                 cout << "Cursos matriculados:\n";

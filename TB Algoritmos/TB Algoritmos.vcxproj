@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="cursos_matriculados.txt" />
+    <Text Include="enrolledCourses.txt" />
     <Text Include="Forum1.txt" />
     <Text Include="courses.txt" />
   </ItemGroup>
@@ -154,7 +154,6 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\..\Documents\GitHub\Trabajo-Final-Algoritmos\TB Algoritmos\courses.csv" />
     <None Include="admins.csv" />
     <None Include="books.csv" />
     <None Include="professors.csv" />
