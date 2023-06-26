@@ -27,7 +27,8 @@ public:
 
 	//Leer foro
 	void readForum() {
-		ifstream file("Forum1.txt");
+		ifstream file;
+		file.open("Forum1.txt", ios::in);
 		if (file.fail()) {
 			cout << "No se pudo abrir el archivo" << endl;
 		}
@@ -35,10 +36,15 @@ public:
 			string id;
 			string codeUser;
 			string text;
-			while (getline(file, id, ';') && getline(file, codeUser, ';') && getline(file, text)) {
+			while (!file.eof()) {
+				getline(file, id, ';');
+				getline(file, codeUser, ';');
+				getline(file, text, '\n');
 				Message message(id, codeUser, text);
-				// Add to graph
+
+				//Add to graph
 				messages->addNode(message);
+
 				this->size++;
 			}
 			cout << "Foro leido" << endl;
