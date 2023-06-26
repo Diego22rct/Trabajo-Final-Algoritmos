@@ -4,7 +4,6 @@
 #include "Course.hpp"
 #include "DLL.hpp"
 #include "HT.hpp"
-#include "CourseManager.hpp"
 
 #include <fstream>
 class Student : public User {
@@ -13,14 +12,12 @@ private:
     string major;
     DLL<Course*> enrolledCourses;
     DLL<Course*> availableCourses;
-    CourseManager* courseManager;
 
 public:
     Student(string name = " ", string id = " ", string email = " ", string major = " ", int cycle = 0, string password = " ")
         : User(id, name, email, password, "alumno"), major(major), cycle(cycle) {
         //loadCourses();
         loadEnrolledCourses();
-        courseManager = new CourseManager(100);
 
     }
     string getMajor() {
@@ -75,7 +72,6 @@ public:
         file.close();
     }
     void showCourses() {
-        courseManager->displayCourses();
         availableCourses.forEach([](Course* c) {
             cout << c->toString() << endl;
             });

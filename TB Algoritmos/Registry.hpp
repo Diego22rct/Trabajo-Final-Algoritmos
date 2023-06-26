@@ -7,6 +7,7 @@
 #include "Forum.hpp"
 #include "BST.hpp"
 #include "Library.hpp"
+#include "CourseManager.hpp"
 using namespace std;
 
 class Registry {
@@ -19,6 +20,7 @@ private:
     BST<Administrator*> administratorTree;
     Forum forum;
     Library library;
+    CourseManager courseManager;
 public:
     Registry() :
         studentTree(
@@ -69,7 +71,7 @@ public:
     
         forum = Forum("Forum1");
         library = Library(150);
-
+        courseManager = CourseManager();
     }
 
     ~Registry() {
@@ -438,14 +440,16 @@ public:
 
             switch (option) {
             case 1:
-                student->showCourses();
+                courseManager.displayCourses();
                 break;
             case 2:
-                //student->showEnrolledCourses();
+                
                 break;
             case 3: {
                 cout << "Cursos disponibles:\n";
-                //student->showCourses();
+                studentDatabase.forEach([](Student* student) {
+					student->showEnrolledCourses();
+				});
                 string codigoCurso;
                 cout << "Ingrese el codigo del curso: ";
                 cin >> codigoCurso;

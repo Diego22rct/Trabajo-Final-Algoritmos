@@ -156,6 +156,7 @@
     <None Include="admins.csv" />
     <None Include="books.csv" />
     <None Include="courses.txt" />
+    <None Include="CURSOS.csv" />
     <None Include="professors.csv" />
     <None Include="students.csv" />
   </ItemGroup>

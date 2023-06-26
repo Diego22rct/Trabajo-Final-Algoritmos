@@ -13,8 +13,9 @@ private:
     HT<Course>* courses;
 
 public:
-    CourseManager(int capacity) {
+    CourseManager(){
         courses = new HT<Course>(10);
+        cout << "Cargando cursos..." << endl;
         loadCourses();
     }
 
@@ -41,16 +42,14 @@ public:
     }
 
     void loadCourses() {
-        ifstream file("courses.txt");
+        ifstream file("CURSOS.csv");
         string idx, name, code;
 
         if (file.is_open()) {
-            while (getline(file, idx, ','), getline(file, name, ','), getline(file, code)) {
-                if (!file.eof()) {
-                    Course course(name, code);
-                    courses->insert(code, course);
-                    cout << "Cargando curso: " << course.getCourseName() << endl;
-                }
+            while (getline(file, idx, ';'), getline(file, name, ';'), getline(file, code)) {
+				Course course(name, code);
+				addCourse(code, course);
+                cout << "Cargando curso: " << course.toString() << endl;
 			}
 			file.close();
 		}

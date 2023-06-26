@@ -102,5 +102,8 @@
     <None Include="courses.txt">
       <Filter>Archivos de recursos</Filter>
     </None>
+    <None Include="CURSOS.csv">
+      <Filter>Archivos de recursos</Filter>
+    </None>
   </ItemGroup>
 </Project>
