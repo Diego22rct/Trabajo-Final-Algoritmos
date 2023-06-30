@@ -9,36 +9,28 @@ class Book
 {
 private:
     string title;
-    struct Author
-    {
-        string name;
-        string lastName;
-    };
+    string name;
+    string lastName;
     string date;
-    Author* author;
 
 public:
-    Book(string title = "", string name = "", string lastName = "", string date = "") : title(title), date(date)
+    Book(string title = "", string name = "", string lastName = "", string date = "") : title(title), date(date), name(name), lastName(lastName)
     {
-        author = new Author;
-        author->name = name;
-        author->lastName = lastName;
     }
 
     ~Book()
     {
-        delete author;
     }
 
     friend ostream& operator<<(ostream& os, const Book& book)
     {
-        os << book.title << " " << book.date << " " << book.author->name << " " << book.author->lastName << endl;
+        os << book.title << " " << book.date << " " << book.name << " " << book.lastName << endl;
         return os;
     }
 
     bool operator==(Book other)
     {
-        return title.compare(other.title) == 0 && author->name == other.author->name && author->lastName == other.author->lastName && date == other.date;
+        return title == other.title;
     }
 
     // setters and getters
@@ -48,8 +40,8 @@ public:
 
     string getTitle() { return title; }
     string getDate() { return date; }
-    string getName() { return author->name; }
-    string getLastName() { return author->lastName; }
+    string getName() { return name; }
+    string getLastName() { return lastName; }
 };
 
 

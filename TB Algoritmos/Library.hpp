@@ -23,41 +23,23 @@ public:
 	}
 
 	void readFile() {
-		ifstream file("books.csv");
+		ifstream file("books.csv", ios::in);
 		string line;
 		string titleF;
 		string nameF;
 		string lastNameF;
 		string dateF;
 
-		if (file.is_open()) {
-			while (getline(file, titleF, ';')) {
-				getline(file, nameF, ';');
-				getline(file, lastNameF, ';');
-				getline(file, dateF, '\n');
-				Book book = Book(titleF, nameF, lastNameF, dateF);
-				books->insert(book.getTitle(), book);
-			}
-			cout << "File readed" << endl;
-		}
-		else
+		while (file >> titleF >> nameF >> lastNameF >> dateF) 
 		{
-			throw "Error opening file";
+			Book book(titleF, nameF, lastNameF, dateF);
+			books->insert(book.getTitle(), book);
 		}
 	}
 
 	void saveFile() {
-		//ofstream file("books.csv");
-		//if (file.is_open()) {
-		//	books->display([&](Book book) -> void {
-		//		file << book.getTitle() << ";" << book.getName() << ";" << book.getLastName() << ";" << book.getDate() << endl;
-		//		});
-		//	cout << "File saved" << endl;
-		//}
-		//else
-		//{
-		//	throw runtime_error("Error opening file");
-		//}
+		ofstream file("books.csv", ios::out);
+
 	}
 
 	void addBook(Book book) {
