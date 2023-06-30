@@ -38,8 +38,8 @@ public:
 	}
 
 	void saveFile() {
-		ofstream file("books.csv", ios::out);
-
+		//
+		cout << "Saving..." << endl;
 	}
 
 	void addBook(Book book) {
