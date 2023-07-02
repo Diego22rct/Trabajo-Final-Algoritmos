@@ -17,13 +17,9 @@ public:
             cout << "Student ID: " << student->getId() << endl;
             cout << "Enrolled courses:\n";
             student->getEnrolledCourses().forEach([](Course* course) {
-				cout << "Course name: " << course->getCourseName() << endl;
-				cout << "Course code: " << course->getCourseCode() << endl;
-				//cout << "Final grade: " << course->getFinalGrade() << endl;
-				cout << "-------------------\n";
-				});
-        });
-
+                cout << course->toString() << endl;
+                });
+            });
     }
 
     void modifyStudentGrade(DLL<Student*>& students, string studentId, string courseCode, double newGrade) {
@@ -31,19 +27,21 @@ public:
         bool courseFound = false;
 
         students.findAndApply(
-			[studentId](Student* student) { return student->getId() == studentId; },
-            [&studentFound, &courseFound, courseCode, newGrade](Student* student) {
-				studentFound = true;
+            [studentId](Student* student) { return student->getId() == studentId; },
+            [this, studentId, courseCode, newGrade, &studentFound, &courseFound](Student* student) {
+                studentFound = true;
+                cout << "Student found: " << student->getName() << endl;
+                auto searchCriteria = [courseCode](Course* course) { return course->getCourseCode() == courseCode; };
                 student->getEnrolledCourses().findAndApply(
-					[courseCode](Course* course) { return course->getCourseCode() == courseCode; },
-                    [&courseFound, newGrade](Course* course) {
-						courseFound = true;
-						//course->setGrade(newGrade);
-						cout << "Grade modified correctly." << endl;
-					}
-				);
-			}
-		);
+                    searchCriteria,
+                    [this, studentId, courseCode, newGrade, &courseFound](Course* course) {
+                        course->setGrade(newGrade);
+                        courseFound = true;
+                        cout << "Course found and grade modified." << endl;
+                    }
+                );
+            }
+        );
 
         if (!studentFound) {
             cout << "Student not found." << endl;
@@ -56,15 +54,17 @@ public:
     void removeStudentGrade(DLL<Student*>& students, string courseCode) {
         bool courseFound = false;
 
-        students.forEach([&courseFound, courseCode](Student* student) {
-            student->getEnrolledCourses().findAndApply(
-				[courseCode](Course* course) { return course->getCourseCode() == courseCode; },
-                [&courseFound](Course* course) {
-					courseFound = true;
-					//course->setGrade(0);
-				}
-			);
-		});
+        students.forEach([courseCode, &courseFound](Student* student) {
+            int numCoursesBefore = student->getEnrolledCourses().size();
+            student->getEnrolledCourses().popAllElementsIf([courseCode](Course* course) {
+                return course->getCourseCode() == courseCode;
+                });
+            int numCoursesAfter = student->getEnrolledCourses().size();
+
+            if (numCoursesBefore > numCoursesAfter) {
+                courseFound = true;
+            }
+            });
 
         if (courseFound) {
             cout << "Grade deleted correctly." << endl;

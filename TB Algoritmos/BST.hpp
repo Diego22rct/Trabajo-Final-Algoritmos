@@ -52,53 +52,58 @@ public:
     }
 
     T findSuccessor(T value) {
-        Node* aux = _root;
-        Node* succesor = nullptr;
-        while (aux) {
-            if (_equals(aux->value, value))
-                break;
-            if (_compare(aux->value, value)) {
-                succesor = aux;
-                aux = aux->leftChild;
+        Node* aux = _root; // 1
+        Node* succesor = nullptr; // 1
+        while (aux) { // n(+1 Max INTERNO) -> n(5)
+            if (_equals(aux->value, value)) // 1
+                break; // 1
+            if (_compare(aux->value, value)) { // 1
+                succesor = aux; // 1
+                aux = aux->leftChild; // 2
             }
             else
-                aux = aux->rightChild;
+                aux = aux->rightChild; // 1 + 1
         }
-        if (aux == nullptr) throw "Value does not exists in this tree";
-        if (aux->rightChild) {
-            Node* currentNode = aux->rightChild;
-            while (currentNode->leftChild != nullptr) currentNode = currentNode->leftChild;
-            return currentNode->value;
+        if (aux == nullptr) throw "Value does not exists in this tree"; // 2
+        if (aux->rightChild != nullptr) { // 1 -> 1 +2 +n(3) +1
+            Node* currentNode = aux->rightChild; // 2
+            while (currentNode->leftChild != nullptr) // n(1+ Max INTERNO) -> n(3)
+                currentNode = currentNode->leftChild; // 2
+            return currentNode->value; // 1
         }
-        if (succesor == nullptr) {
-            return T();
+        if (succesor == nullptr) { // 1
+            return T(); // 1
         }
-        return succesor->value;
+        return succesor->value; // 1
     }
+    //findSuccessor 
+    //1 + +1 +n5 +2 + 1 +2 +n(1 + 2) +1 + 2 +1
+    //9+8n -> O(n)
 
     T findPreviousNode(T value) {
-        Node* aux = _root;
-        Node* prev = nullptr;
-        while (aux) {
-            if (_equals(aux->value, value))
-                break;
-            if (_compare(aux->value, value))
-                aux = aux->leftChild;
-            else {
-                prev = aux;
-                aux = aux->rightChild;
+        Node* aux = _root; // 1
+        Node* prev = nullptr; // 1
+        while (aux) { // n(+1 Max Interno) -> n(1 + 2 +3)
+            if (_equals(aux->value, value)) // 1
+                break; // 1
+            if (_compare(aux->value, value)) // 1 -> 3
+                aux = aux->leftChild; // 2
+            else { // sum ->3
+                prev = aux; // 1
+                aux = aux->rightChild; // 2
             }
         }
-        if (aux == nullptr) throw "Value does not exists in this tree";
-        if (aux->leftChild) {
-            Node* currentNode = aux->leftChild;
-            while (currentNode->rightChild != nullptr) currentNode = currentNode->rightChild;
-            return currentNode->value;
+        if (aux == nullptr) throw "Value does not exists in this tree"; // 1
+        if (aux->leftChild) { // 1
+            Node* currentNode = aux->leftChild; // 2
+            while (currentNode->rightChild != nullptr)  // n(1 + Max INTERNO) -> n(3)
+                currentNode = currentNode->rightChild; // 2
+            return currentNode->value; // 1
         }
-        if (prev == nullptr) {
-            return T();
+        if (prev == nullptr) { // 1
+            return T(); // 1
         }
-        return prev->value;
+        return prev->value; // 1
     }
 private:
     struct Node {

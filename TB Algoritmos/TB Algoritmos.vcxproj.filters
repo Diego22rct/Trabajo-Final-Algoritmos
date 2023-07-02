@@ -21,10 +21,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="cursos_matriculados.txt">
+    <Text Include="Forum1.txt">
       <Filter>Archivos de recursos</Filter>
     </Text>
-    <Text Include="Forum1.txt">
+    <Text Include="coursesEnrolled.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="courses.txt">
       <Filter>Archivos de recursos</Filter>
     </Text>
   </ItemGroup>
@@ -99,10 +102,7 @@
     <None Include="books.csv">
       <Filter>Archivos de recursos</Filter>
     </None>
-    <None Include="courses.txt">
-      <Filter>Archivos de recursos</Filter>
-    </None>
-    <None Include="CURSOS.csv">
+    <None Include="..\..\..\..\..\Documents\GitHub\Trabajo-Final-Algoritmos\TB Algoritmos\courses.csv">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>
