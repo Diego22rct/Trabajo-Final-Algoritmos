@@ -50,9 +50,9 @@ public:
     }
     void display(void (*show)(T)) {
         for (unsigned int i = 0; i < _capacity; ++i) {
-            std::cout << "\nPos: " << i << ": ";
+            //std::cout << "\nPos: " << i << ": ";
             if (_hashTable[i] == nullptr) {
-                std::cout << "nullptr";
+                //std::cout << "nullptr";
                 continue;
             }
             _hashTable[i]->display([&](Element a) -> void {

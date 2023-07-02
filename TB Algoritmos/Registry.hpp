@@ -424,11 +424,11 @@ public:
         int option;
         do {
             cout << "======Menu de opciones======\n";
-            cout << "1. Ver cursos disponibles\n";
-            cout << "2. Ver cursos matriculados\n";
-            cout << "3. Matricularse en un curso\n";
-            cout << "4. Ver notas de los cursos\n";
-            cout << "5. Retirarse de un curso\n";
+            //cout << "1. Ver cursos disponibles\n";
+            //cout << "2. Ver cursos matriculados\n";
+            //cout << "3. Matricularse en un curso\n";
+            //cout << "4. Ver notas de los cursos\n";
+            //cout << "5. Retirarse de un curso\n";
             cout << "6. Ingresar al foro\n";
             cout << "7. Ver Biblioteca\n";
             cout << "8. Salir\n";
